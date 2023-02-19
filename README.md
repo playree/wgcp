@@ -1,0 +1,2 @@
+# wgcp
+WireGuard Control Panel
