@@ -40,6 +40,7 @@ next-env.d.ts
 
 # SQLite
 *.sqlite
+*.sqlite-journal
 
 # Work
 /.work
