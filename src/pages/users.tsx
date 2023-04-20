@@ -1,8 +1,8 @@
-import { AuthNextPage } from '@/components/AuthHandler'
+import { NextPageCustom } from '@/common'
 
-const Users: AuthNextPage = () => {
+const Users: NextPageCustom = () => {
   return <div>test</div>
 }
-Users.requireAuth = true
+Users.enableAuth = true
 
 export default Users

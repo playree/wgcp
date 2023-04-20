@@ -1,4 +1,4 @@
-import { AuthNextPage } from '@/components/AuthHandler'
+import { NextPageCustom } from '@/common'
 import { useSession } from 'next-auth/react'
 import { Inter } from 'next/font/google'
 import Image from 'next/image'
@@ -6,7 +6,7 @@ import Link from 'next/link'
 
 const inter = Inter({ subsets: ['latin'] })
 
-const Home: AuthNextPage = () => {
+const Home: NextPageCustom = () => {
   const { data: session } = useSession()
   return (
     <main className='flex min-h-screen flex-col items-center justify-between p-24'>
@@ -111,6 +111,6 @@ const Home: AuthNextPage = () => {
     </main>
   )
 }
-Home.requireAuth = true
+Home.enableAuth = true
 
 export default Home

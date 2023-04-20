@@ -1,15 +1,17 @@
-import { AuthIsRequired } from '@/components/AuthHandler'
+import { AppPropsCustom } from '@/common'
+import { AuthHandler } from '@/components/AuthHandler'
+import { SideMenu } from '@/components/SideMenu'
 import '@/styles/globals.css'
 import { SessionProvider } from 'next-auth/react'
-import { AppProps } from 'next/app'
 
-export const App = ({ Component, pageProps }: AppProps) => {
-  return (
-    <SessionProvider session={pageProps.session}>
-      <AuthIsRequired>
-        <Component {...pageProps} />
-      </AuthIsRequired>
-    </SessionProvider>
-  )
+export const App = ({ Component, pageProps }: AppPropsCustom) => {
+  let element = <Component {...pageProps} />
+  if (Component.enableSideMenu) {
+    element = <SideMenu>{element}</SideMenu>
+  }
+  if (Component.enableAuth) {
+    element = <AuthHandler>{element}</AuthHandler>
+  }
+  return <SessionProvider session={pageProps.session}>{element}</SessionProvider>
 }
 export default App

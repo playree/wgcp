@@ -19,7 +19,7 @@ export default NextAuth({
           return null
         }
         if (bcrypt.compareSync(password, user.passwordHash)) {
-          return user
+          return { id: user.id }
         }
         return null
       },
@@ -30,12 +30,12 @@ export default NextAuth({
       console.debug('signIn:', param)
       return true
     },
-    async session({ token, session, trigger }) {
-      console.debug('session.trigger:', trigger)
+    async session({ token, session }) {
       if (token.sub) {
         const user = await prisma.user.findUnique({ where: { id: token.sub } })
         if (user) {
           session.user.id = user.id
+          session.user.name = user.name
           session.user.isAdmin = user.isAdmin
           console.debug('session.user:', session.user)
         }

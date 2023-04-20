@@ -1,6 +1,6 @@
-import { AuthNextPage } from '@/components/AuthHandler'
+import { NextPageCustom } from '@/common'
 
-const Hello: AuthNextPage = () => {
+const Hello: NextPageCustom = () => {
   return <div>hello</div>
 }
 
