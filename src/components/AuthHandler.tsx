@@ -1,26 +1,41 @@
 import { NextPage } from 'next'
-import { Session } from 'next-auth'
 import { signIn, useSession } from 'next-auth/react'
-import { AppProps } from 'next/app'
 import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
 
 export const PATH_SIGNIN = '/auth/signin'
 
-export type AuthAppProps = AppProps<{ session: Session }> & { Component: { requireAuth: boolean } }
-
 export type AuthNextPage<P = Record<string, never>, IP = P> = NextPage<P, IP> & {
   requireAuth?: boolean
 }
 
-export const AuthHandler = ({ children }: { children: JSX.Element }): JSX.Element => {
-  const { status } = useSession()
+export const AuthHandler: React.FC<{ children: JSX.Element }> = ({ children }) => {
+  const { status, data: session } = useSession()
   const router = useRouter()
   useEffect(() => {
     if (status === 'unauthenticated' && router.pathname != PATH_SIGNIN) {
       signIn()
     }
   }, [router, status])
-  if (status === 'authenticated') return children
-  return <p>Loading...</p>
+  useEffect(() => {
+    if (session) {
+      console.debug('authenticated:', session)
+    }
+  }, [session])
+  if (status === 'authenticated') {
+    return children
+  }
+  return (
+    <div className='flex h-screen w-screen items-center justify-center'>
+      <div className='h-8 w-8 animate-spin rounded-xl bg-blue-600'></div>
+      <div className='ml-4'>Loading...</div>
+    </div>
+  )
+}
+
+export const AuthIsRequired: React.FC<{ children: JSX.Element }> = ({ children }) => {
+  if (children.type.requireAuth) {
+    return <AuthHandler>{children}</AuthHandler>
+  }
+  return children
 }

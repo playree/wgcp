@@ -1,17 +1,15 @@
-import { AuthAppProps, AuthHandler } from '@/components/AuthHandler'
+import { AuthIsRequired } from '@/components/AuthHandler'
 import '@/styles/globals.css'
 import { SessionProvider } from 'next-auth/react'
+import { AppProps } from 'next/app'
 
-export default function App({ Component, pageProps }: AuthAppProps) {
+export const App = ({ Component, pageProps }: AppProps) => {
   return (
     <SessionProvider session={pageProps.session}>
-      {Component.requireAuth ? (
-        <AuthHandler>
-          <Component {...pageProps} />
-        </AuthHandler>
-      ) : (
+      <AuthIsRequired>
         <Component {...pageProps} />
-      )}
+      </AuthIsRequired>
     </SessionProvider>
   )
 }
+export default App
