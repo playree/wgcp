@@ -1,32 +1,24 @@
-import React from 'react'
+import { NextPage } from 'next'
+import React, { ReactNode, useState } from 'react'
 
-export const SideMenu: React.FC<{ children: JSX.Element }> = ({ children }) => {
-  if (!children.type.requireMenu) {
-    return children
-  }
+export const SideMenu: NextPage<{ children: ReactNode }> = ({ children }) => {
+  const [isOpen, setIsOpen] = useState(false)
   return (
     <>
       <button
-        data-drawer-target='default-sidebar'
-        data-drawer-toggle='default-sidebar'
-        aria-controls='default-sidebar'
-        type='button'
-        className='ml-3 mt-2 inline-flex items-center rounded-lg p-2 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600 md:hidden'
+        className='bg-white'
+        onClick={() => {
+          setIsOpen(true)
+        }}
       >
-        <span className='sr-only'>Open sidebar</span>
-        <svg
-          className='h-6 w-6'
-          aria-hidden='true'
-          fill='currentColor'
-          viewBox='0 0 20 20'
-          xmlns='http://www.w3.org/2000/svg'
-        >
-          <path d='M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z'></path>
-        </svg>
+        test
       </button>
-      <aside
+      <nav
         id='default-sidebar'
-        className='fixed left-0 top-0 z-40 h-screen w-64 -translate-x-full transition-transform sm:translate-x-0'
+        className={
+          'fixed left-0 top-0 z-40 h-screen w-64 -translate-x-full transition-transform' +
+          (isOpen ? ' transform-none' : ' md:translate-x-0')
+        }
         aria-label='Sidebar'
       >
         <div className='h-full overflow-y-auto bg-gray-50 px-3 py-4 dark:bg-gray-800'>
@@ -51,7 +43,14 @@ export const SideMenu: React.FC<{ children: JSX.Element }> = ({ children }) => {
             </li>
           </ul>
         </div>
-      </aside>
+      </nav>
+      <div
+        className={'fixed inset-0 z-30 bg-gray-900 bg-opacity-50 dark:bg-opacity-80' + (isOpen ? '' : ' hidden')}
+        onClick={() => {
+          setIsOpen(false)
+        }}
+      ></div>
+      <div className='p-4 md:ml-64'>{children}</div>
     </>
   )
 }
