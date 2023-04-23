@@ -1,4 +1,5 @@
 import { NextPage } from 'next'
+import Link from 'next/link'
 import React, { ReactNode } from 'react'
 
 export const MenuButton: NextPage<{
@@ -8,7 +9,7 @@ export const MenuButton: NextPage<{
   onClick?: () => void
 }> = ({ text, to, icon, onClick }) => {
   return (
-    <a
+    <Link
       href={to}
       className='flex items-center rounded-lg p-2 text-gray-900 hover:bg-blue-100 dark:text-white dark:hover:bg-gray-700'
       onClick={onClick}
@@ -17,7 +18,7 @@ export const MenuButton: NextPage<{
         {icon}
       </span>
       <span className='ml-3'>{text}</span>
-    </a>
+    </Link>
   )
 }
 export default MenuButton
