@@ -1,6 +1,6 @@
 import { AppPropsCustom } from '@/common'
 import { AuthHandler } from '@/components/AuthHandler'
-import { SideMenu } from '@/components/SideMenu'
+import { SideMenu } from '@/components/SideMenu/'
 import '@/styles/globals.css'
 import { SessionProvider } from 'next-auth/react'
 

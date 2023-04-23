@@ -7,7 +7,7 @@ export const prisma = new PrismaClient()
 
 export type NextPageCustom<P = Record<string, Session | null | undefined>, IP = P> = NextPage<P, IP> & {
   enableAuth?: boolean
-  enableSideMenu?: boolean
+  enableSideMenu?: boolean | string
 }
 
 export type AppPropsCustom<P = Record<string, Session | null | undefined>> = AppProps<P> & {
