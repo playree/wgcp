@@ -1,5 +1,6 @@
-import { Bars3BottomLeftIcon, Squares2x2Icon, UsersIcon } from '@/components/icon'
+import { ArrowRightOnRectangleIcon, Bars3BottomLeftIcon, Squares2x2Icon, UsersIcon } from '@/components/icon'
 import { NextPage } from 'next'
+import { signOut as signOutAuth } from 'next-auth/react'
 import React, { ReactNode, useState } from 'react'
 
 import { MenuButton } from './MenuButton'
@@ -9,10 +10,13 @@ export const SideMenu: NextPage<{ children: ReactNode; select?: string | boolean
   const closeMenu = () => {
     setIsOpen(false)
   }
+  const signOut = () => {
+    signOutAuth()
+  }
   return (
     <>
       <button
-        className='fixed ml-3 mt-2 items-center rounded-lg bg-gray-100 bg-opacity-50 p-2 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600 md:hidden'
+        className='fixed ml-3 mt-2 rounded-lg bg-gray-100 bg-opacity-50 p-2 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:bg-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600 md:hidden'
         onClick={() => {
           setIsOpen(true)
         }}
@@ -46,6 +50,11 @@ export const SideMenu: NextPage<{ children: ReactNode; select?: string | boolean
                 onClick={closeMenu}
                 selected={'users' === select}
               />
+            </li>
+          </ul>
+          <ul className='mt-4 space-y-2 border-t border-gray-200 pt-4 font-medium dark:border-gray-600'>
+            <li>
+              <MenuButton text='Sign Out' to='' icon={<ArrowRightOnRectangleIcon />} onClick={signOut} />
             </li>
           </ul>
         </div>

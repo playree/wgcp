@@ -2,7 +2,9 @@ import { NextPageCustom } from '@/common'
 
 const Users: NextPageCustom = () => {
   return (
-    <main className='flex flex-col items-center justify-between p-24'>
+    <main className='container@main'>
+      <br></br>
+      <br></br>
       <div>test</div>
     </main>
   )
