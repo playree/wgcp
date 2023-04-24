@@ -7,7 +7,7 @@ import { SessionProvider } from 'next-auth/react'
 export const App = ({ Component, pageProps }: AppPropsCustom) => {
   let element = <Component {...pageProps} />
   if (Component.enableSideMenu) {
-    element = <SideMenu>{element}</SideMenu>
+    element = <SideMenu select={Component.enableSideMenu}>{element}</SideMenu>
   }
   if (Component.enableAuth) {
     element = <AuthHandler>{element}</AuthHandler>

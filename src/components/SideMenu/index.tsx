@@ -4,7 +4,7 @@ import React, { ReactNode, useState } from 'react'
 
 import { MenuButton } from './MenuButton'
 
-export const SideMenu: NextPage<{ children: ReactNode }> = ({ children }) => {
+export const SideMenu: NextPage<{ children: ReactNode; select?: string | boolean }> = ({ children, select }) => {
   const [isOpen, setIsOpen] = useState(false)
   const closeMenu = () => {
     setIsOpen(false)
@@ -30,10 +30,22 @@ export const SideMenu: NextPage<{ children: ReactNode }> = ({ children }) => {
         <div className='h-full overflow-y-auto bg-gray-100 px-3 py-4 dark:bg-gray-800'>
           <ul className='space-y-2 font-medium'>
             <li>
-              <MenuButton text='Dashboard' to='/' icon={<Squares2x2Icon />} onClick={closeMenu} />
+              <MenuButton
+                text='Dashboard'
+                to='/'
+                icon={<Squares2x2Icon />}
+                onClick={closeMenu}
+                selected={'dashboard' === select}
+              />
             </li>
             <li>
-              <MenuButton text='Users' to='/users' icon={<UsersIcon />} onClick={closeMenu} />
+              <MenuButton
+                text='Users'
+                to='/users'
+                icon={<UsersIcon />}
+                onClick={closeMenu}
+                selected={'users' === select}
+              />
             </li>
           </ul>
         </div>

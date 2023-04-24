@@ -91,6 +91,6 @@ const Home: NextPageCustom = () => {
   )
 }
 Home.enableAuth = true
-Home.enableSideMenu = true
+Home.enableSideMenu = 'dashboard'
 
 export default Home

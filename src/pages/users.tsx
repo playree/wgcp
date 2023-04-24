@@ -8,6 +8,6 @@ const Users: NextPageCustom = () => {
   )
 }
 Users.enableAuth = true
-Users.enableSideMenu = true
+Users.enableSideMenu = 'users'
 
 export default Users
