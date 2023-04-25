@@ -1,6 +1,10 @@
 import { NextPage } from 'next'
 import React from 'react'
 
+//
+// Uses icons from https://heroicons.dev/
+//
+
 export const Bars3BottomLeftIcon: NextPage<{ className?: string }> = ({ className }) => {
   return (
     <svg
