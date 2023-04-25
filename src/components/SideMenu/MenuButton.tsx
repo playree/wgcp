@@ -22,7 +22,7 @@ export const MenuButton: NextPage<{
         <span className='ml-3'>{text}</span>
       </Link>
       {selected ? (
-        <div className='absolute left-0 top-0 h-full w-full rounded-lg bg-gray-300 py-2 opacity-40 dark:bg-gray-300' />
+        <div className='absolute left-0 top-0 h-full w-full rounded-lg bg-gray-300 py-2 opacity-40 dark:bg-gray-600' />
       ) : (
         <></>
       )}

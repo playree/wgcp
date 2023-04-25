@@ -4,6 +4,7 @@ import { signOut as signOutAuth } from 'next-auth/react'
 import React, { ReactNode, useState } from 'react'
 
 import { MenuButton } from './MenuButton'
+import { MenuGroup } from './MenuGroup'
 
 export const SideMenu: NextPage<{ children: ReactNode; select?: string | boolean }> = ({ children, select }) => {
   const [isOpen, setIsOpen] = useState(false)
@@ -32,7 +33,7 @@ export const SideMenu: NextPage<{ children: ReactNode; select?: string | boolean
         aria-label='Sidebar'
       >
         <div className='h-full overflow-y-auto bg-gray-100 px-3 py-4 dark:bg-gray-800'>
-          <ul className='space-y-2 font-medium'>
+          <ul className='mt-4 space-y-2 font-medium'>
             <li>
               <MenuButton
                 text='Dashboard'
@@ -41,6 +42,11 @@ export const SideMenu: NextPage<{ children: ReactNode; select?: string | boolean
                 onClick={closeMenu}
                 selected={'dashboard' === select}
               />
+            </li>
+          </ul>
+          <ul className='mt-4 space-y-2 font-medium'>
+            <li>
+              <MenuGroup text='admin' />
             </li>
             <li>
               <MenuButton
@@ -52,7 +58,10 @@ export const SideMenu: NextPage<{ children: ReactNode; select?: string | boolean
               />
             </li>
           </ul>
-          <ul className='mt-4 space-y-2 border-t border-gray-200 pt-4 font-medium dark:border-gray-600'>
+          <ul className='mt-4 space-y-2 font-medium'>
+            <li>
+              <MenuGroup text='action' />
+            </li>
             <li>
               <MenuButton text='Sign Out' to='' icon={<ArrowRightOnRectangleIcon />} onClick={signOut} />
             </li>
