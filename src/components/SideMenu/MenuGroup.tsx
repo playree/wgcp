@@ -7,7 +7,7 @@ export const MenuGroup: NextPage<{
   return (
     <span
       className='flex text-xs text-gray-400 after:mb-2 after:ml-2 after:inline-block after:w-full after:border-b
-         after:border-gray-300 dark:after:border-gray-600'
+        after:border-gray-300 dark:after:border-gray-600'
     >
       {text}
     </span>

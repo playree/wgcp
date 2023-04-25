@@ -24,8 +24,8 @@ export const SideMenu: NextPage<{ children: ReactNode; select?: string | boolean
     <>
       <button
         className='fixed ml-3 mt-2 rounded-lg bg-gray-100 bg-opacity-50 p-2 text-sm text-gray-500
-           hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:bg-gray-900
-           dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600 md:hidden'
+          hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:bg-gray-900
+          dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600 md:hidden'
         onClick={() => {
           setIsOpen(true)
         }}
