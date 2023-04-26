@@ -22,10 +22,15 @@ const Bars3BottomLeftIcon: NextPage<{ className?: string }> = ({ className }) =>
 }
 
 export const MenuButton: NextPage<{
+  /** メニューテキスト */
   text: string
+  /** 遷移先 */
   to: string
+  /** アイコン */
   icon?: ReactNode
+  /** クリック時動作(メニューを閉じるなど) */
   onClick?: () => void
+  /** 選択状態 */
   selected?: boolean
 }> = ({ text, to, icon, onClick, selected }) => {
   return (
@@ -51,6 +56,7 @@ export const MenuButton: NextPage<{
 }
 
 export const MenuGroup: NextPage<{
+  /** テキスト */
   text: string
 }> = ({ text }) => {
   return (
@@ -67,7 +73,9 @@ export type MenuContentType = (props: { select?: string | boolean; closeMenu: ()
 
 export const SideMenu: NextPage<{
   children: ReactNode
+  /** メニュー内容 */
   menu: MenuContentType
+  /** 選択識別子 */
   select?: string | boolean
 }> = ({ children, menu, select }) => {
   const [isOpen, setIsOpen] = useState(false)

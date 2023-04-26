@@ -8,6 +8,7 @@ import { SessionProvider } from 'next-auth/react'
 export const App = ({ Component, pageProps }: AppPropsCustom) => {
   let element = <Component {...pageProps} />
   if (Component.enableSideMenu) {
+    // サイドメニューを表示するページ
     element = (
       <SideMenu menu={Menu} select={Component.enableSideMenu}>
         {element}
@@ -15,6 +16,7 @@ export const App = ({ Component, pageProps }: AppPropsCustom) => {
     )
   }
   if (Component.enableAuth) {
+    // 認証を必要とするページ
     element = <AuthHandler>{element}</AuthHandler>
   }
   return <SessionProvider session={pageProps.session}>{element}</SessionProvider>

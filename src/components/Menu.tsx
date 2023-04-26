@@ -4,6 +4,9 @@ import React from 'react'
 
 import { MenuButton, MenuContentType, MenuGroup } from './SideMenu'
 
+/**
+ * サイドメニュー
+ */
 export const Menu: MenuContentType = ({ select, closeMenu }) => {
   const signOut = () => {
     signOutAuth()
