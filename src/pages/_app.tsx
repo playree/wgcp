@@ -1,13 +1,18 @@
 import { AppPropsCustom } from '@/common'
 import { AuthHandler } from '@/components/AuthHandler'
-import { SideMenu } from '@/components/SideMenu/'
+import { Menu } from '@/components/Menu'
+import { SideMenu } from '@/components/SideMenu'
 import '@/styles/globals.css'
 import { SessionProvider } from 'next-auth/react'
 
 export const App = ({ Component, pageProps }: AppPropsCustom) => {
   let element = <Component {...pageProps} />
   if (Component.enableSideMenu) {
-    element = <SideMenu select={Component.enableSideMenu}>{element}</SideMenu>
+    element = (
+      <SideMenu menu={Menu} select={Component.enableSideMenu}>
+        {element}
+      </SideMenu>
+    )
   }
   if (Component.enableAuth) {
     element = <AuthHandler>{element}</AuthHandler>
