@@ -37,7 +37,7 @@ export const MenuButton: NextPage<{
     <div className='relative'>
       <Link
         href={to}
-        className='flex rounded-lg p-2 py-2 text-gray-900 hover:bg-gradient-to-l hover:from-blue-100
+        className='flex rounded-lg p-2 text-gray-900 hover:bg-gradient-to-l hover:from-blue-100
           dark:text-white dark:hover:from-gray-900'
         onClick={onClick}
       >
@@ -60,12 +60,10 @@ export const MenuGroup: NextPage<{
   text: string
 }> = ({ text }) => {
   return (
-    <span
-      className='flex text-xs text-gray-400 after:mb-2 after:ml-2 after:inline-block after:w-full after:border-b
-        after:border-gray-300 dark:after:border-gray-600'
-    >
-      {text}
-    </span>
+    <div className='flex'>
+      <div className='flex-none text-xs text-gray-400'>{text}</div>
+      <div className='mb-2 ml-2 flex-auto border-b border-gray-300 dark:border-gray-600' />
+    </div>
   )
 }
 
