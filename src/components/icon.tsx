@@ -23,6 +23,26 @@ export const Squares2x2Icon: NextPage<{ className?: string }> = ({ className }) 
   )
 }
 
+export const UserCircleIcon: NextPage<{ className?: string }> = ({ className }) => {
+  return (
+    <svg
+      className={className}
+      fill='none'
+      stroke='currentColor'
+      strokeWidth={1.5}
+      viewBox='0 0 24 24'
+      xmlns='http://www.w3.org/2000/svg'
+      aria-hidden='true'
+    >
+      <path
+        strokeLinecap='round'
+        strokeLinejoin='round'
+        d='M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z'
+      />
+    </svg>
+  )
+}
+
 export const UsersIcon: NextPage<{ className?: string }> = ({ className }) => {
   return (
     <svg
@@ -93,6 +113,26 @@ export const LanguageIcon: NextPage<{ className?: string }> = ({ className }) =>
         strokeLinecap='round'
         strokeLinejoin='round'
         d='M10.5 21l5.25-11.25L21 21m-9-3h7.5M3 5.621a48.474 48.474 0 016-.371m0 0c1.12 0 2.233.038 3.334.114M9 5.25V3m3.334 2.364C11.176 10.658 7.69 15.08 3 17.502m9.334-12.138c.896.061 1.785.147 2.666.257m-4.589 8.495a18.023 18.023 0 01-3.827-5.802'
+      />
+    </svg>
+  )
+}
+
+export const IdentificationIcon: NextPage<{ className?: string }> = ({ className }) => {
+  return (
+    <svg
+      className={className}
+      fill='none'
+      stroke='currentColor'
+      strokeWidth={1.5}
+      viewBox='0 0 24 24'
+      xmlns='http://www.w3.org/2000/svg'
+      aria-hidden='true'
+    >
+      <path
+        strokeLinecap='round'
+        strokeLinejoin='round'
+        d='M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5zm6-10.125a1.875 1.875 0 11-3.75 0 1.875 1.875 0 013.75 0zm1.294 6.336a6.721 6.721 0 01-3.17.789 6.721 6.721 0 01-3.168-.789 3.376 3.376 0 016.338 0z'
       />
     </svg>
   )

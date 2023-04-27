@@ -6,8 +6,10 @@ type LocaleItem =
   | 'menu_settings'
   | 'menu_locale'
   | 'menu_signout'
+  | 'group_user'
   | 'group_admin'
-  | 'group_action'
+  | 'item_user'
+  | 'item_admin'
 
 const locales: Record<LocaleItem, { en: string; ja?: string }> = {
   menu_dashboard: {
@@ -30,13 +32,21 @@ const locales: Record<LocaleItem, { en: string; ja?: string }> = {
     en: 'Sign Out',
     ja: 'サインアウト',
   },
+  group_user: {
+    en: 'User',
+    ja: 'ユーザー',
+  },
   group_admin: {
-    en: 'admin',
+    en: 'Admin',
     ja: '管理者',
   },
-  group_action: {
-    en: 'action',
-    ja: '操作',
+  item_user: {
+    en: 'User',
+    ja: '一般ユーザー',
+  },
+  item_admin: {
+    en: 'Administrator',
+    ja: '管理者',
   },
 }
 
