@@ -34,19 +34,15 @@ export const Menu: MenuContentType = ({ select, closeMenu }) => {
       <ul className='mt-4 space-y-2 font-medium'>
         <li>
           <div
-            className='rounded-lg bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] 
+            className='rounded-lg bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] 
             from-blue-50 to-white p-2 pb-4 dark:from-slate-700 dark:to-slate-900'
           >
             <div className='flex'>
-              <span className='h-6 w-6 text-gray-500 dark:text-gray-400'>
-                <UserCircleIcon />
-              </span>
+              <UserCircleIcon className='h-6 text-gray-500 dark:text-gray-400' />
               <span className='ml-2'>{session?.user.name}</span>
             </div>
             <div className='mt-2 flex pl-2'>
-              <span className='h-4 w-4 text-gray-500 dark:text-gray-400'>
-                <IdentificationIcon />
-              </span>
+              <IdentificationIcon className='h-4 text-gray-500 dark:text-gray-400' />
               <span className='ml-2 text-xs font-normal'>
                 {session?.user.isAdmin ? t('item_admin') : t('item_user')}
               </span>
@@ -55,9 +51,7 @@ export const Menu: MenuContentType = ({ select, closeMenu }) => {
         </li>
         <li className='flex text-xs'>
           <div className='flex flex-1 items-center px-2 py-1 font-medium text-gray-900 dark:text-white'>
-            <span className='text-gray-500 dark:text-gray-400'>
-              <LanguageIcon className='h-4 w-4' />
-            </span>
+            <LanguageIcon className='h-4 text-gray-500 dark:text-gray-400' />
             <span className='ml-3'>{t('menu_locale')}</span>
           </div>
           <select
@@ -76,7 +70,7 @@ export const Menu: MenuContentType = ({ select, closeMenu }) => {
           <MenuButton
             text={t('menu_signout')}
             to=''
-            icon={<ArrowRightOnRectangleIcon className='h-4 w-4' />}
+            icon={<ArrowRightOnRectangleIcon className='h-4' />}
             onClick={signOut}
           />
         </li>
@@ -89,7 +83,7 @@ export const Menu: MenuContentType = ({ select, closeMenu }) => {
           <MenuButton
             text={t('menu_dashboard')}
             to='/'
-            icon={<Squares2x2Icon className='h-6 w-6' />}
+            icon={<Squares2x2Icon className='h-6' />}
             onClick={closeMenu}
             selected={'dashboard' === select}
           />
@@ -103,7 +97,7 @@ export const Menu: MenuContentType = ({ select, closeMenu }) => {
           <MenuButton
             text={t('menu_users')}
             to='/users'
-            icon={<UsersIcon className='h-6 w-6' />}
+            icon={<UsersIcon className='h-6' />}
             onClick={closeMenu}
             selected={'users' === select}
           />
@@ -112,7 +106,7 @@ export const Menu: MenuContentType = ({ select, closeMenu }) => {
           <MenuButton
             text={t('menu_settings')}
             to='/settings'
-            icon={<Cog6ToothIcon className='h-6 w-6' />}
+            icon={<Cog6ToothIcon className='h-6' />}
             onClick={closeMenu}
             selected={'settings' === select}
           />

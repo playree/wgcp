@@ -21,6 +21,22 @@ const Bars3BottomLeftIcon: NextPage<{ className?: string }> = ({ className }) =>
   )
 }
 
+const CheckIcon: NextPage<{ className?: string }> = ({ className }) => {
+  return (
+    <svg
+      className={className}
+      fill='none'
+      stroke='currentColor'
+      strokeWidth={1.5}
+      viewBox='0 0 24 24'
+      xmlns='http://www.w3.org/2000/svg'
+      aria-hidden='true'
+    >
+      <path strokeLinecap='round' strokeLinejoin='round' d='M4.5 12.75l6 6 9-13.5' />
+    </svg>
+  )
+}
+
 export const MenuButton: NextPage<{
   /** メニューテキスト */
   text: string
@@ -47,7 +63,12 @@ export const MenuButton: NextPage<{
         <span className='ml-3'>{text}</span>
       </Link>
       {selected ? (
-        <div className='absolute left-0 top-0 h-full w-full rounded-lg bg-gray-300 py-2 opacity-40 dark:bg-gray-600' />
+        <div
+          className='absolute left-0 top-0 flex h-full w-full justify-end rounded-lg bg-gradient-to-l 
+          from-gray-300 to-gray-100 p-2 opacity-40 dark:from-gray-700 dark:to-gray-800'
+        >
+          <CheckIcon className='h-full text-white dark:text-black' />
+        </div>
       ) : (
         <></>
       )}
