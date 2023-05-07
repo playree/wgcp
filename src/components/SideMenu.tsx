@@ -104,8 +104,8 @@ export const SideMenu: NextPage<{
   return (
     <>
       <button
-        className='fixed ml-3 mt-2 rounded-lg bg-gray-100 bg-opacity-50 p-2 text-sm text-gray-500
-          hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:bg-gray-900
+        className='fixed ml-3 mt-2 rounded-lg bg-gray-200 p-2 text-sm text-gray-500 opacity-30
+          hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:bg-gray-900
           dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600 md:hidden'
         onClick={() => {
           setIsOpen(true)
@@ -116,17 +116,19 @@ export const SideMenu: NextPage<{
 
       <nav // サイドメニュー
         id='side-menu'
-        className={
-          'fixed left-0 top-0 z-40 h-screen w-64 -translate-x-full transition-transform' +
-          (isOpen ? ' transform-none' : ' md:translate-x-0')
-        }
+        className={[
+          'fixed left-0 top-0 z-40 h-screen w-64 -translate-x-full transition-transform',
+          isOpen ? 'transform-none' : 'md:translate-x-0',
+        ].join(' ')}
       >
         <div className='h-full overflow-y-auto bg-gray-100 px-3 py-4 dark:bg-gray-800'>
           {menu({ select, closeMenu })}
         </div>
       </nav>
       <div
-        className={'fixed inset-0 z-30 bg-gray-900 bg-opacity-50 dark:bg-opacity-80' + (isOpen ? '' : ' hidden')}
+        className={['fixed inset-0 z-30 bg-gray-900 bg-opacity-50 dark:bg-opacity-80', isOpen ? '' : 'hidden'].join(
+          ' ',
+        )}
         onClick={closeMenu}
       ></div>
 

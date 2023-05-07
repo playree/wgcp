@@ -13,8 +13,11 @@ const handler = wrapAuth(
       uptime: number
     }>,
   ) => {
-    const { code } = await execCmdSync('wg --version')
+    console.log('req:', req)
+    const { code, stdout, stderr } = await execCmdSync('wg --version')
     console.log('code:', code)
+    console.log('stdout:', stdout)
+    console.log('stderr:', stderr)
     res.status(200).json({
       timestamp: new Date().getTime(),
       memory: { total: os.totalmem(), free: os.freemem() },

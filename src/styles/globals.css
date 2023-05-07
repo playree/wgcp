@@ -27,4 +27,7 @@ body {
     margin-right: auto;
     max-width: 768px;
   }
+  .grid\@main {
+    @apply grid grid-cols-12 gap-1;
+  }
 }
