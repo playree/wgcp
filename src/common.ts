@@ -11,7 +11,10 @@ export const prisma = new PrismaClient()
 
 // 画面共通部品
 
-export type NextPageCustom<P = Record<string, Session | null | undefined>, IP = P> = NextPage<P, IP> & {
+export type NextPageCustom<P = Record<string, unknown>> = NextPage<
+  Record<string, Session | unknown> & P,
+  Record<string, Session | unknown> & P
+> & {
   enableAuth?: boolean
   enableSideMenu?: boolean | string
 }
