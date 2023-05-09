@@ -1,6 +1,8 @@
 import { NextPageCustom } from '@/common'
-import Card from '@/components/Card'
-import { convByte } from '@/utils/conv'
+import { Card, CardTitle } from '@/components/Card'
+import { Progress } from '@/components/Progress'
+import { formatByte, formatPercent, formatTime } from '@/utils/format'
+import { useLocale } from '@/utils/locale'
 import { GetServerSideProps } from 'next'
 import os from 'os'
 
@@ -25,17 +27,25 @@ export const getServerSideProps: GetServerSideProps<Props> = async () => {
 }
 
 const Home: NextPageCustom<Props> = (props) => {
+  const { t } = useLocale()
   return (
     <main className='container@main grid@main'>
-      <div className='col-span-12 sm:col-span-6'>
-        <br></br>
-        <br></br>
-      </div>
       <Card className='col-span-12 sm:col-span-6'>
-        {convByte(props.sysinfo.memory.free)} / {convByte(props.sysinfo.memory.total)}
+        <CardTitle>{t('item_systeminfo')}</CardTitle>
+        <div className='grid@main'>
+          <div className='col-span-5'>{t('item_freemem')} :</div>
+          <div className='col-span-7'>
+            <Progress progress={formatPercent(props.sysinfo.memory.free, props.sysinfo.memory.total)}>
+              {formatByte(props.sysinfo.memory.free)} / {formatByte(props.sysinfo.memory.total)}
+            </Progress>
+          </div>
+
+          <div className='col-span-5'>{t('item_uptime')} :</div>
+          <div className='col-span-7'>{formatTime(props.sysinfo.uptime)}</div>
+        </div>
       </Card>
-      <div className='col-span-12 h-96 sm:col-span-6'></div>
-      <div className='col-span-12 h-96 sm:col-span-6'></div>
+
+      <Card className='grid@main col-span-12 sm:col-span-6'></Card>
     </main>
   )
 }

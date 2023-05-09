@@ -10,6 +10,9 @@ type LocaleItem =
   | 'group_admin'
   | 'item_user'
   | 'item_admin'
+  | 'item_systeminfo'
+  | 'item_freemem'
+  | 'item_uptime'
 
 const locales: Record<LocaleItem, { en: string; ja?: string }> = {
   menu_dashboard: {
@@ -47,6 +50,18 @@ const locales: Record<LocaleItem, { en: string; ja?: string }> = {
   item_admin: {
     en: 'Administrator',
     ja: '管理者',
+  },
+  item_systeminfo: {
+    en: 'System info',
+    ja: 'システム情報',
+  },
+  item_freemem: {
+    en: 'Free Memory',
+    ja: '空きメモリ',
+  },
+  item_uptime: {
+    en: 'Up time',
+    ja: '起動時間',
   },
 }
 

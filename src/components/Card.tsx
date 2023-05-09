@@ -1,8 +1,8 @@
 import { NextPage } from 'next'
 import React, { ReactNode } from 'react'
 
-export const SideMenu: NextPage<{
-  children: ReactNode
+export const Card: NextPage<{
+  children?: ReactNode
   className?: string
 }> = ({ children, className }) => {
   return (
@@ -16,4 +16,16 @@ export const SideMenu: NextPage<{
     </div>
   )
 }
-export default SideMenu
+
+export const CardTitle: NextPage<{
+  children?: ReactNode
+  className?: string
+}> = ({ children, className }) => {
+  return (
+    <div className={['border-g mb-4 border-b border-gray-300 pb-1 text-lg dark:border-gray-600', className].join(' ')}>
+      {children}
+    </div>
+  )
+}
+
+export default Card

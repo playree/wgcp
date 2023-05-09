@@ -106,7 +106,7 @@ export const SideMenu: NextPage<{
       <button
         className='fixed ml-3 mt-2 rounded-lg bg-gray-200 p-2 text-sm text-gray-500 opacity-30
           hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:bg-gray-900
-          dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600 md:hidden'
+          dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600 lg:hidden'
         onClick={() => {
           setIsOpen(true)
         }}
@@ -118,7 +118,7 @@ export const SideMenu: NextPage<{
         id='side-menu'
         className={[
           'fixed left-0 top-0 z-40 h-screen w-64 -translate-x-full transition-transform',
-          isOpen ? 'transform-none' : 'md:translate-x-0',
+          isOpen ? 'transform-none' : 'lg:translate-x-0',
         ].join(' ')}
       >
         <div className='h-full overflow-y-auto bg-gray-100 px-3 py-4 dark:bg-gray-800'>
@@ -134,7 +134,7 @@ export const SideMenu: NextPage<{
 
       <div // メインコンテンツ
         id='side-main'
-        className='p-4 md:ml-64'
+        className='p-4 lg:ml-64'
       >
         {children}
       </div>
