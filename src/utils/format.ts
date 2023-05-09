@@ -33,7 +33,7 @@ export const formatTime = (sec: number) => {
       unitDay = Math.trunc(nextSec / 24)
     }
   }
-  return `${unitDay} days  ${unitHour.toString().padStart(2, '0')} : ${unitMin.toString().padStart(2, '0')} : ${unitSec
+  return `${unitDay} days : ${unitHour.toString().padStart(2, '0')} : ${unitMin.toString().padStart(2, '0')} : ${unitSec
     .toString()
     .padStart(2, '0')}`
 }
