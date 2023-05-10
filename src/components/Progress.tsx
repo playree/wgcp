@@ -9,7 +9,9 @@ export const Progress: NextPage<{
   return (
     <div className='relative w-full rounded bg-neutral-200 dark:bg-neutral-600'>
       <div
-        className={['rounded bg-blue-400 p-1 text-center leading-none text-white', className].join(' ')}
+        className={['rounded bg-blue-300 p-1 text-center leading-none text-white dark:bg-blue-700', className].join(
+          ' ',
+        )}
         style={{ width: `${progress}%` }}
       >
         &nbsp;
