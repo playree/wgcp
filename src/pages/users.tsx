@@ -1,9 +1,22 @@
 import { NextPageCustom } from '@/common'
+import { Button } from '@/components/Button'
+import { UserPlusIcon, UsersIcon } from '@/components/icon'
+import { useLocale } from '@/utils/locale'
 
 const Users: NextPageCustom = () => {
+  const { t } = useLocale()
   return (
-    <main className='container@main'>
-      <table className='relative w-full text-left'>
+    <main className='container@main grid@main'>
+      <div className='col-span-12 flex text-lg font-bold sm:col-span-6'>
+        <UsersIcon className='h-6' />
+        <span className='ml-2 mr-6'>{t('menu_users')}</span>
+        <Button>
+          <UserPlusIcon className='mr-1 h-5' />
+          <span>{t('item_add')}</span>
+        </Button>
+      </div>
+      <div className='col-span-12 flex sm:col-span-6'></div>
+      <table className='relative col-span-12 mt-2 w-full text-left'>
         <thead>
           <tr>
             <th className='sticky top-0 bg-gray-200 p-2 dark:bg-gray-700'>username</th>

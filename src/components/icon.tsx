@@ -27,17 +27,15 @@ export const UserCircleIcon: NextPage<{ className?: string }> = ({ className }) 
   return (
     <svg
       className={className}
-      fill='none'
-      stroke='currentColor'
-      strokeWidth={1.5}
+      fill='currentColor'
       viewBox='0 0 24 24'
       xmlns='http://www.w3.org/2000/svg'
       aria-hidden='true'
     >
       <path
-        strokeLinecap='round'
-        strokeLinejoin='round'
-        d='M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z'
+        clipRule='evenodd'
+        fillRule='evenodd'
+        d='M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z'
       />
     </svg>
   )
@@ -134,6 +132,20 @@ export const IdentificationIcon: NextPage<{ className?: string }> = ({ className
         strokeLinejoin='round'
         d='M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5zm6-10.125a1.875 1.875 0 11-3.75 0 1.875 1.875 0 013.75 0zm1.294 6.336a6.721 6.721 0 01-3.17.789 6.721 6.721 0 01-3.168-.789 3.376 3.376 0 016.338 0z'
       />
+    </svg>
+  )
+}
+
+export const UserPlusIcon: NextPage<{ className?: string }> = ({ className }) => {
+  return (
+    <svg
+      className={className}
+      fill='currentColor'
+      viewBox='0 0 24 24'
+      xmlns='http://www.w3.org/2000/svg'
+      aria-hidden='true'
+    >
+      <path d='M6.25 6.375a4.125 4.125 0 118.25 0 4.125 4.125 0 01-8.25 0zM3.25 19.125a7.125 7.125 0 0114.25 0v.003l-.001.119a.75.75 0 01-.363.63 13.067 13.067 0 01-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 01-.364-.63l-.001-.122zM19.75 7.5a.75.75 0 00-1.5 0v2.25H16a.75.75 0 000 1.5h2.25v2.25a.75.75 0 001.5 0v-2.25H22a.75.75 0 000-1.5h-2.25V7.5z' />
     </svg>
   )
 }

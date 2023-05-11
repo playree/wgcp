@@ -13,6 +13,7 @@ type LocaleItem =
   | 'item_systeminfo'
   | 'item_freemem'
   | 'item_uptime'
+  | 'item_add'
 
 const locales: Record<LocaleItem, { en: string; ja?: string }> = {
   menu_dashboard: {
@@ -62,6 +63,10 @@ const locales: Record<LocaleItem, { en: string; ja?: string }> = {
   item_uptime: {
     en: 'Up time',
     ja: '起動時間',
+  },
+  item_add: {
+    en: 'Add',
+    ja: '追加',
   },
 }
 
