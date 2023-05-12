@@ -5,7 +5,8 @@ export const Button: NextPage<{
   children?: ReactNode
   className?: string
   theme?: 'primary' | 'secondary'
-}> = ({ children, className }) => {
+  onClick?: React.MouseEventHandler<HTMLButtonElement>
+}> = ({ children, className, onClick }) => {
   return (
     <button
       className={[
@@ -13,6 +14,7 @@ export const Button: NextPage<{
         'bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300',
         className,
       ].join(' ')}
+      onClick={onClick}
     >
       {children}
     </button>

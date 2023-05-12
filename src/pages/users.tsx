@@ -2,15 +2,27 @@ import { NextPageCustom } from '@/common'
 import { Button } from '@/components/Button'
 import { UserPlusIcon, UsersIcon } from '@/components/icon'
 import { useLocale } from '@/utils/locale'
+import { NextPage } from 'next'
+import { useState } from 'react'
+
+const EditModal: NextPage<{
+  isOpen: boolean
+}> = ({ isOpen }) => {
+  if (!isOpen) {
+    return <></>
+  }
+  return <div className='flex'>open</div>
+}
 
 const Users: NextPageCustom = () => {
   const { t } = useLocale()
+  const [isOpenEditModal, setIsOpenEditModal] = useState(false)
   return (
     <main className='container@main grid@main'>
-      <div className='col-span-12 flex text-lg font-bold sm:col-span-6'>
-        <UsersIcon className='h-6' />
-        <span className='ml-2 mr-6'>{t('menu_users')}</span>
-        <Button>
+      <div className='col-span-12 flex items-center text-lg font-bold sm:col-span-6'>
+        <UsersIcon className='ml-1 h-6' />
+        <span className='ml-3 mr-6'>{t('menu_users')}</span>
+        <Button onClick={() => setIsOpenEditModal(true)}>
           <UserPlusIcon className='mr-1 h-5' />
           <span>{t('item_add')}</span>
         </Button>
@@ -46,6 +58,7 @@ const Users: NextPageCustom = () => {
           </tr>
         </tbody>
       </table>
+      <EditModal isOpen={isOpenEditModal} />
     </main>
   )
 }
