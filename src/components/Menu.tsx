@@ -1,14 +1,15 @@
 import {
   ArrowRightOnRectangleIcon,
   Cog6ToothIcon,
+  GlobeAltIcon,
   IdentificationIcon,
-  LanguageIcon,
   Squares2x2Icon,
   UserCircleIcon,
   UsersIcon,
 } from '@/components/icon'
 import { useLocale } from '@/utils/locale'
 import { signOut as signOutAuth, useSession } from 'next-auth/react'
+import { useTheme } from 'next-themes'
 import { useRouter } from 'next/router'
 import React, { ChangeEvent, useState } from 'react'
 
@@ -22,6 +23,7 @@ export const Menu: MenuContentType = ({ select, closeMenu }) => {
   const { locale, t } = useLocale()
   const { data: session } = useSession()
   const [selectLocale, setSelectLocale] = useState(locale)
+  const { theme, setTheme } = useTheme()
   const signOut = () => {
     signOutAuth()
   }
@@ -29,6 +31,10 @@ export const Menu: MenuContentType = ({ select, closeMenu }) => {
     setSelectLocale(e.target.value)
     router.push(router.asPath, undefined, { locale: e.target.value })
   }
+  const changeTheme = (e: ChangeEvent<HTMLSelectElement>) => {
+    setTheme(e.target.value)
+  }
+
   return (
     <>
       <ul className='mt-4 space-y-2 font-medium'>
@@ -50,13 +56,13 @@ export const Menu: MenuContentType = ({ select, closeMenu }) => {
           </div>
         </li>
         <li className='flex text-xs'>
-          <div className='flex flex-1 items-center px-2 py-1 font-medium text-gray-900 dark:text-white'>
-            <LanguageIcon className='h-4 text-gray-500 dark:text-gray-400' />
-            <span className='ml-3'>{t('menu_locale')}</span>
+          <div className='flex items-center px-2 py-1 font-medium text-gray-900 dark:text-white'>
+            <GlobeAltIcon className='h-4 text-gray-500 dark:text-gray-400' />
+            <span className='ml-2'>{t('menu_locale')}</span>
           </div>
           <select
             id='locale'
-            className='block w-full flex-1 rounded-lg border border-gray-300 bg-gray-50 px-2 py-0.5 text-gray-900
+            className='block w-fit rounded-lg border border-gray-300 bg-gray-50 px-1 py-0.5 text-gray-900
                 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700
                 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500'
             value={selectLocale}
@@ -64,6 +70,21 @@ export const Menu: MenuContentType = ({ select, closeMenu }) => {
           >
             <option value='en'>en</option>
             <option value='ja'>ja</option>
+          </select>
+          <div className='flex items-center px-1 py-1 font-medium text-gray-900 dark:text-white'>
+            <span className='ml-2'>{t('menu_theme')}</span>
+          </div>
+          <select
+            id='theme'
+            className='block w-fit rounded-lg border border-gray-300 bg-gray-50 px-1 py-0.5 text-gray-900
+                focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700
+                dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500'
+            value={theme}
+            onChange={changeTheme}
+          >
+            <option value='system'>OS</option>
+            <option value='light'>Light</option>
+            <option value='dark'>Dark</option>
           </select>
         </li>
         <li className='text-xs'>

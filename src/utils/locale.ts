@@ -5,6 +5,7 @@ type LocaleItem =
   | 'menu_users'
   | 'menu_settings'
   | 'menu_locale'
+  | 'menu_theme'
   | 'menu_signout'
   | 'group_user'
   | 'group_admin'
@@ -31,6 +32,10 @@ const locales: Record<LocaleItem, { en: string; ja?: string }> = {
   menu_locale: {
     en: 'Locale',
     ja: '言語',
+  },
+  menu_theme: {
+    en: 'Theme',
+    ja: 'テーマ',
   },
   menu_signout: {
     en: 'Sign Out',

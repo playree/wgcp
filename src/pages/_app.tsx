@@ -4,6 +4,7 @@ import { Menu } from '@/components/Menu'
 import { SideMenu } from '@/components/SideMenu'
 import '@/styles/globals.css'
 import { SessionProvider } from 'next-auth/react'
+import { ThemeProvider } from 'next-themes'
 
 export const App = ({ Component, pageProps }: AppPropsCustom) => {
   let element = <Component {...pageProps} />
@@ -19,6 +20,10 @@ export const App = ({ Component, pageProps }: AppPropsCustom) => {
     // 認証を必要とするページ
     element = <AuthHandler>{element}</AuthHandler>
   }
-  return <SessionProvider session={pageProps.session}>{element}</SessionProvider>
+  return (
+    <SessionProvider session={pageProps.session}>
+      <ThemeProvider attribute='class'>{element}</ThemeProvider>
+    </SessionProvider>
+  )
 }
 export default App
