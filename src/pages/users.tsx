@@ -1,21 +1,39 @@
 import { NextPageCustom } from '@/common'
 import { Button } from '@/components/Button'
-import { Modal, ModalTitle } from '@/components/Modal'
-import { UserPlusIcon, UsersIcon } from '@/components/icon'
+import { Modal, ModalAction, ModalTitle } from '@/components/Modal'
+import { CheckCircleIcon, UserPlusIcon, UsersIcon, XCircleIcon } from '@/components/icon'
 import { useLocale } from '@/utils/locale'
 import { NextPage } from 'next'
 import { useState } from 'react'
 
+/**
+ * ユーザー編集モーダル
+ */
 const EditModal: NextPage<{
   isOpen: boolean
-}> = ({ isOpen }) => {
+  onClose: () => void
+}> = ({ isOpen, onClose }) => {
+  const { t } = useLocale()
   if (!isOpen) {
     return <></>
   }
   return (
-    <Modal isOpen={isOpen}>
-      <ModalTitle>Title</ModalTitle>
+    <Modal isOpen={isOpen} onClose={onClose}>
+      <ModalTitle onClose={onClose}>
+        <UserPlusIcon className='mr-2 h-5' />
+        <span>{t('item_user_add')}</span>
+      </ModalTitle>
       <div className='h-64'></div>
+      <ModalAction>
+        <Button>
+          <CheckCircleIcon className='mr-1 h-5' />
+          {t('item_add')}
+        </Button>
+        <Button className='ml-4' theme='secondary'>
+          <XCircleIcon className='mr-1 h-5' />
+          {t('item_cancel')}
+        </Button>
+      </ModalAction>
     </Modal>
   )
 }
@@ -28,7 +46,7 @@ const Users: NextPageCustom = () => {
       <div className='col-span-12 flex items-center text-lg font-bold sm:col-span-6'>
         <UsersIcon className='ml-1 h-6' />
         <span className='ml-3 mr-6'>{t('menu_users')}</span>
-        <Button onClick={() => setIsOpenEditModal(true)}>
+        <Button className='text-sm' onClick={() => setIsOpenEditModal(true)}>
           <UserPlusIcon className='mr-1 h-5' />
           <span>{t('item_add')}</span>
         </Button>
@@ -64,7 +82,7 @@ const Users: NextPageCustom = () => {
           </tr>
         </tbody>
       </table>
-      <EditModal isOpen={isOpenEditModal} />
+      <EditModal isOpen={isOpenEditModal} onClose={() => setIsOpenEditModal(false)} />
     </main>
   )
 }

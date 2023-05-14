@@ -10,11 +10,13 @@ type LocaleItem =
   | 'group_user'
   | 'group_admin'
   | 'item_user'
+  | 'item_user_add'
   | 'item_admin'
   | 'item_systeminfo'
   | 'item_freemem'
   | 'item_uptime'
   | 'item_add'
+  | 'item_cancel'
 
 const locales: Record<LocaleItem, { en: string; ja?: string }> = {
   menu_dashboard: {
@@ -53,6 +55,10 @@ const locales: Record<LocaleItem, { en: string; ja?: string }> = {
     en: 'User',
     ja: '一般ユーザー',
   },
+  item_user_add: {
+    en: 'Add User',
+    ja: 'ユーザー追加',
+  },
   item_admin: {
     en: 'Administrator',
     ja: '管理者',
@@ -72,6 +78,10 @@ const locales: Record<LocaleItem, { en: string; ja?: string }> = {
   item_add: {
     en: 'Add',
     ja: '追加',
+  },
+  item_cancel: {
+    en: 'Cancel',
+    ja: 'キャンセル',
   },
 }
 
