@@ -38,7 +38,8 @@ export const Menu: MenuContentType = ({ select, closeMenu }) => {
   return (
     <>
       <ul className='mt-4 space-y-2 font-medium'>
-        <li>
+        <li // ユーザー情報
+        >
           <div
             className='rounded-lg bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] 
             from-blue-50 to-white p-2 pb-4 dark:from-slate-700 dark:to-slate-900'
@@ -55,7 +56,10 @@ export const Menu: MenuContentType = ({ select, closeMenu }) => {
             </div>
           </div>
         </li>
-        <li className='flex text-xs'>
+
+        <li // 言語・テーマ選択
+          className='flex text-xs'
+        >
           <div className='flex items-center px-2 py-1 font-medium text-gray-900 dark:text-white'>
             <GlobeAltIcon className='h-4 text-gray-500 dark:text-gray-400' />
             <span className='ml-2'>{t('menu_locale')}</span>
@@ -87,7 +91,10 @@ export const Menu: MenuContentType = ({ select, closeMenu }) => {
             <option value='dark'>Dark</option>
           </select>
         </li>
-        <li className='text-xs'>
+
+        <li // サインアウト
+          className='text-xs'
+        >
           <MenuButton
             text={t('menu_signout')}
             to=''
@@ -96,7 +103,10 @@ export const Menu: MenuContentType = ({ select, closeMenu }) => {
           />
         </li>
       </ul>
-      <ul className='mt-4 space-y-2 font-medium'>
+
+      <ul // ユーザーメニュー
+        className='mt-4 space-y-2 font-medium'
+      >
         <li>
           <MenuGroup text={t('group_user')} />
         </li>
@@ -110,7 +120,10 @@ export const Menu: MenuContentType = ({ select, closeMenu }) => {
           />
         </li>
       </ul>
-      <ul className='mt-4 space-y-2 font-medium'>
+
+      <ul // 管理者メニュー
+        className='mt-4 space-y-2 font-medium'
+      >
         <li>
           <MenuGroup text={t('group_admin')} />
         </li>

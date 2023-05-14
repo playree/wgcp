@@ -1,3 +1,4 @@
+import { cnjoin } from '@/utils/helpers'
 import { NextPage } from 'next'
 import Link from 'next/link'
 import React, { ReactNode, useState } from 'react'
@@ -111,24 +112,22 @@ export const SideMenu: NextPage<{
           setIsOpen(true)
         }}
       >
-        <Bars3BottomLeftIcon className='h-6 w-6' />
+        <Bars3BottomLeftIcon className='h-6' />
       </button>
 
       <nav // サイドメニュー
         id='side-menu'
-        className={[
+        className={cnjoin(
           'fixed left-0 top-0 z-40 h-screen w-64 -translate-x-full transition-transform',
           isOpen ? 'transform-none' : 'lg:translate-x-0',
-        ].join(' ')}
+        )}
       >
         <div className='h-full overflow-y-auto bg-gray-100 px-3 py-4 dark:bg-gray-800'>
           {menu({ select, closeMenu })}
         </div>
       </nav>
       <div
-        className={['fixed inset-0 z-30 bg-gray-900 bg-opacity-50 dark:bg-opacity-80', isOpen ? '' : 'hidden'].join(
-          ' ',
-        )}
+        className={cnjoin('fixed inset-0 z-30 bg-gray-900 bg-opacity-50 dark:bg-opacity-80', isOpen ? '' : 'hidden')}
         onClick={closeMenu}
       ></div>
 

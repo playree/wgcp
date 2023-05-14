@@ -1,5 +1,6 @@
 import { NextPageCustom } from '@/common'
 import { Button } from '@/components/Button'
+import { Modal, ModalTitle } from '@/components/Modal'
 import { UserPlusIcon, UsersIcon } from '@/components/icon'
 import { useLocale } from '@/utils/locale'
 import { NextPage } from 'next'
@@ -11,7 +12,12 @@ const EditModal: NextPage<{
   if (!isOpen) {
     return <></>
   }
-  return <div className='flex'>open</div>
+  return (
+    <Modal isOpen={isOpen}>
+      <ModalTitle>Title</ModalTitle>
+      <div className='h-64'></div>
+    </Modal>
+  )
 }
 
 const Users: NextPageCustom = () => {

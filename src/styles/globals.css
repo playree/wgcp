@@ -8,10 +8,7 @@ body {
 
 @layer components {
   .container\@main {
-    position: relative;
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 768px;
+    @apply relative mx-auto max-w-3xl;
   }
   .grid\@main {
     @apply grid grid-cols-12 gap-2;
