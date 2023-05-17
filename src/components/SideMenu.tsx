@@ -28,7 +28,7 @@ const CheckIcon: NextPage<{ className?: string }> = ({ className }) => {
       className={className}
       fill='none'
       stroke='currentColor'
-      strokeWidth={1.5}
+      strokeWidth={3}
       viewBox='0 0 24 24'
       xmlns='http://www.w3.org/2000/svg'
       aria-hidden='true'

@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  @apply bg-white text-black dark:bg-black dark:text-white;
+  @apply bg-white text-gray-900 dark:bg-black dark:text-white;
 }
 
 @layer components {
@@ -13,13 +13,19 @@ body {
   .grid\@main {
     @apply grid grid-cols-12 gap-2;
   }
+  .focus\@ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-blue-400;
+  }
   .text\@light {
     @apply text-gray-700 dark:text-gray-400;
   }
   .bg\@light {
     @apply bg-gray-50 dark:bg-gray-900;
   }
+  .border\@main {
+    @apply border-gray-400;
+  }
   .border\@light {
-    @apply border-gray-300 dark:border-gray-700;
+    @apply border-gray-300 dark:border-gray-600;
   }
 }

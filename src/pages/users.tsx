@@ -23,7 +23,28 @@ const EditModal: NextPage<{
         <UserPlusIcon className='mr-2 h-5' />
         <span>{t('item_user_add')}</span>
       </ModalTitle>
-      <div className='h-64'></div>
+      <div className='grid@main h-64'>
+        <div className='col-span-12 p-2 sm:col-span-6'>
+          <div className='relative mt-2'>
+            <input
+              type='text'
+              id='username'
+              placeholder=' '
+              className='border@main peer block w-full appearance-none border-0 border-b bg-transparent 
+            px-1 py-2.5 text-sm text-gray-900 focus:border-b-2 focus:border-blue-400 focus:outline-none 
+            focus:ring-0 dark:text-white'
+            />
+            <label
+              htmlFor='username'
+              className='absolute top-3 origin-[0] -translate-y-6 scale-75 transform pl-0 text-sm text-gray-500 duration-300
+            peer-placeholder-shown:left-1 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 
+            peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-blue-500 dark:text-gray-200'
+            >
+              Username
+            </label>
+          </div>
+        </div>
+      </div>
       <ModalAction>
         <Button>
           <CheckCircleIcon className='mr-1 h-5' />
@@ -43,7 +64,7 @@ const Users: NextPageCustom = () => {
   const [isOpenEditModal, setIsOpenEditModal] = useState(false)
   return (
     <main className='container@main grid@main'>
-      <div className='col-span-12 flex items-center text-lg font-bold sm:col-span-6'>
+      <div className='col-span-12 flex items-center text-lg font-bold'>
         <UsersIcon className='ml-1 h-6' />
         <span className='ml-3 mr-6'>{t('menu_users')}</span>
         <Button className='text-sm' onClick={() => setIsOpenEditModal(true)}>
@@ -51,7 +72,6 @@ const Users: NextPageCustom = () => {
           <span>{t('item_add')}</span>
         </Button>
       </div>
-      <div className='col-span-12 flex sm:col-span-6'></div>
       <table className='relative col-span-12 mt-2 w-full text-left'>
         <thead>
           <tr>

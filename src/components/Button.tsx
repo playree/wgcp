@@ -7,43 +7,26 @@ export const Button: NextPage<{
   className?: string
   theme?: 'primary' | 'secondary' | 'noframe'
   onClick?: React.MouseEventHandler<HTMLButtonElement>
-}> = ({ children, className, theme, onClick }) => {
+}> = ({ children, className: _className, theme, onClick }) => {
+  let className = 'bg-blue-600 text-white hover:bg-blue-700'
   switch (theme) {
     case 'secondary':
-      return (
-        <button
-          className={cnjoin(
-            'flex items-center rounded border border-gray-400 px-2 py-1 font-medium text-black dark:text-white',
-            'hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-300 hover:dark:bg-gray-600',
-            className,
-          )}
-          onClick={onClick}
-        >
-          {children}
-        </button>
-      )
+      className = 'border border@main text-gray-900 dark:text-white hover:bg-gray-300 hover:dark:bg-gray-600'
+      break
     case 'noframe':
-      return (
-        <button
-          className={cnjoin(
-            'flex items-center rounded px-2 py-1 font-medium text-black dark:text-white',
-            'hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-300 hover:dark:bg-gray-600',
-            className,
-          )}
-          onClick={onClick}
-        >
-          {children}
-        </button>
-      )
+      className = 'text-gray-900 dark:text-white hover:bg-gray-300 hover:dark:bg-gray-600'
+      break
+    default:
+      break
   }
 
   return (
     <button
-      className={[
-        'flex items-center rounded px-2 py-1 font-medium text-white',
-        'bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300',
+      className={cnjoin(
+        'focus@ring flex items-center justify-center rounded px-3 py-1 font-medium',
         className,
-      ].join(' ')}
+        _className,
+      )}
       onClick={onClick}
     >
       {children}

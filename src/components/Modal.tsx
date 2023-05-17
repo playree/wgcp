@@ -34,10 +34,7 @@ export const ModalTitle: NextPage<{
   onClose?: () => void
 }> = ({ children, onClose }) => {
   return (
-    <div
-      className='relative flex items-center border-b border-gray-400 px-4 py-2 text-lg
-      font-bold dark:border-gray-500'
-    >
+    <div className='border@light relative flex items-center border-b px-4 py-2 text-lg font-bold'>
       <Button theme='noframe' className='absolute right-0 mr-2' onClick={onClose}>
         <XMarkIcon className='h-4' />
       </Button>
@@ -49,9 +46,7 @@ export const ModalTitle: NextPage<{
 export const ModalAction: NextPage<{
   children?: ReactNode
 }> = ({ children }) => {
-  return (
-    <div className='relative flex items-center border-t border-gray-400 px-4 py-2 dark:border-gray-500'>{children}</div>
-  )
+  return <div className='border@light relative flex items-center border-t px-4 py-2'>{children}</div>
 }
 
 export default Modal
