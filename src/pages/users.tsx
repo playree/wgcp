@@ -1,10 +1,11 @@
 import { NextPageCustom } from '@/common'
 import { Button } from '@/components/Button'
+import { Input } from '@/components/Input'
 import { Modal, ModalAction, ModalTitle } from '@/components/Modal'
 import { CheckCircleIcon, UserPlusIcon, UsersIcon, XCircleIcon } from '@/components/icon'
 import { useLocale } from '@/utils/locale'
 import { NextPage } from 'next'
-import { useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 
 /**
  * ユーザー編集モーダル
@@ -14,6 +15,18 @@ const EditModal: NextPage<{
   onClose: () => void
 }> = ({ isOpen, onClose }) => {
   const { t } = useLocale()
+  const [username, setUsername] = useState('')
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    switch (event.target.id) {
+      case 'username':
+        setUsername(() => event.target.value)
+        break
+      default:
+        break
+    }
+  }
+
   if (!isOpen) {
     return <></>
   }
@@ -25,24 +38,7 @@ const EditModal: NextPage<{
       </ModalTitle>
       <div className='grid@main h-64'>
         <div className='col-span-12 p-2 sm:col-span-6'>
-          <div className='relative mt-2'>
-            <input
-              type='text'
-              id='username'
-              placeholder=' '
-              className='border@main peer block w-full appearance-none border-0 border-b bg-transparent 
-            px-1 py-2.5 text-sm text-gray-900 focus:border-b-2 focus:border-blue-400 focus:outline-none 
-            focus:ring-0 dark:text-white'
-            />
-            <label
-              htmlFor='username'
-              className='absolute top-3 origin-[0] -translate-y-6 scale-75 transform pl-0 text-sm text-gray-500 duration-300
-            peer-placeholder-shown:left-1 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 
-            peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-blue-500 dark:text-gray-200'
-            >
-              Username
-            </label>
-          </div>
+          <Input id='username' value={username} label='UserName' onChange={handleChange} />
         </div>
       </div>
       <ModalAction>

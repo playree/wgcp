@@ -19,7 +19,7 @@ export const Modal: NextPage<{
     >
       <div className='m-8'>
         <div
-          className='mx-auto max-w-2xl rounded-xl bg-gray-200 dark:bg-gray-700'
+          className='mx-auto max-w-2xl rounded-xl bg-gray-100 dark:bg-gray-700'
           onClick={(event) => event.stopPropagation()}
         >
           {children}
