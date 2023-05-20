@@ -1,5 +1,8 @@
-import { prisma } from '../src/common'
+import { PrismaClient } from '@prisma/client'
+
 import { hashPassword } from '../src/utils/password'
+
+const prisma = new PrismaClient()
 
 async function main() {
   await prisma.user.create({

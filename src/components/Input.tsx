@@ -27,9 +27,9 @@ export const Input: NextPage<{
       <label
         htmlFor={id}
         className={cnjoin(
-          'absolute top-3 origin-[0] -translate-y-6 scale-75 transform pl-0 text-sm duration-300  ',
+          'absolute top-3 origin-[0] -translate-y-6 scale-75 transform pl-0 text-sm duration-300',
           'text-gray-500 dark:text-gray-200',
-          'peer-placeholder-shown:left-1 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 ',
+          'peer-placeholder-shown:left-1 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100',
           'peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-blue-500',
         )}
       >

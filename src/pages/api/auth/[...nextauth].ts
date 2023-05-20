@@ -37,6 +37,7 @@ export const authOptions: NextAuthOptions = {
           session.user.id = user.id
           session.user.name = user.name
           session.user.isAdmin = user.isAdmin
+          session.user.email = user.email
           console.debug('session.user:', session.user)
         }
       }
