@@ -1,11 +1,12 @@
 import { NextPageCustom } from '@/common'
 import { Button } from '@/components/Button'
+import { Checkbox } from '@/components/Checkbox'
 import { Input } from '@/components/Input'
 import { Modal, ModalAction, ModalTitle } from '@/components/Modal'
 import { CheckCircleIcon, UserPlusIcon, UsersIcon, XCircleIcon } from '@/components/icon'
 import { useLocale } from '@/utils/locale'
 import { NextPage } from 'next'
-import { ChangeEvent, useState } from 'react'
+import { useState } from 'react'
 
 /**
  * ユーザー編集モーダル
@@ -16,16 +17,8 @@ const EditModal: NextPage<{
 }> = ({ isOpen, onClose }) => {
   const { t } = useLocale()
   const [username, setUsername] = useState('')
-
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    switch (event.target.id) {
-      case 'username':
-        setUsername(() => event.target.value)
-        break
-      default:
-        break
-    }
-  }
+  const [email, setEmail] = useState('')
+  const [isAdmin, setIsAdmin] = useState(false)
 
   if (!isOpen) {
     return <></>
@@ -36,9 +29,25 @@ const EditModal: NextPage<{
         <UserPlusIcon className='mr-2 h-5' />
         <span>{t('item_user_add')}</span>
       </ModalTitle>
-      <div className='grid@main h-64'>
+      <div className='grid@main mb-4 p-2'>
         <div className='col-span-12 p-2 sm:col-span-6'>
-          <Input id='username' value={username} label='UserName' onChange={handleChange} />
+          <Input
+            id='username'
+            value={username}
+            label={t('item_username')}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        </div>
+        <div className='col-span-12 p-2 sm:col-span-6'>
+          <Input id='email' value={email} label={t('item_email')} onChange={(e) => setEmail(e.target.value)} />
+        </div>
+        <div className='col-span-12 p-2 sm:col-span-6'>
+          <Checkbox
+            id='isadmin'
+            value={isAdmin}
+            label={t('item_isadmin')}
+            onChange={() => setIsAdmin((prevState) => !prevState)}
+          />
         </div>
       </div>
       <ModalAction>
@@ -46,7 +55,7 @@ const EditModal: NextPage<{
           <CheckCircleIcon className='mr-1 h-5' />
           {t('item_add')}
         </Button>
-        <Button className='ml-4' theme='secondary'>
+        <Button className='ml-4' theme='secondary' onClick={onClose}>
           <XCircleIcon className='mr-1 h-5' />
           {t('item_cancel')}
         </Button>

@@ -17,6 +17,9 @@ type LocaleItem =
   | 'item_uptime'
   | 'item_add'
   | 'item_cancel'
+  | 'item_username'
+  | 'item_email'
+  | 'item_isadmin'
 
 const locales: Record<LocaleItem, { en: string; ja?: string }> = {
   menu_dashboard: {
@@ -82,6 +85,18 @@ const locales: Record<LocaleItem, { en: string; ja?: string }> = {
   item_cancel: {
     en: 'Cancel',
     ja: 'キャンセル',
+  },
+  item_username: {
+    en: 'User Name',
+    ja: 'ユーザー名',
+  },
+  item_email: {
+    en: 'Email',
+    ja: 'Eメール',
+  },
+  item_isadmin: {
+    en: 'Is Administrater',
+    ja: '管理者権限',
   },
 }
 

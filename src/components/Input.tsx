@@ -19,8 +19,8 @@ export const Input: NextPage<{
         onChange={onChange}
         className={cnjoin(
           'border@main peer block w-full appearance-none px-1 py-2.5 text-sm',
-          'border-0 border-b bg-transparent text-gray-900 dark:text-white',
-          'focus:border-b-2 focus:border-blue-400 focus:outline-none focus:ring-0',
+          'border-0 border-b-2 bg-transparent text-gray-900 dark:text-white',
+          'focus:border-blue-400 focus:outline-none focus:ring-0',
           className,
         )}
       />
