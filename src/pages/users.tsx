@@ -5,8 +5,16 @@ import { Input } from '@/components/Input'
 import { Modal, ModalAction, ModalTitle } from '@/components/Modal'
 import { CheckCircleIcon, UserPlusIcon, UsersIcon, XCircleIcon } from '@/components/icon'
 import { useLocale } from '@/utils/locale'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { NextPage } from 'next'
 import { useState } from 'react'
+import { SubmitHandler, useForm } from 'react-hook-form'
+import { z } from 'zod'
+
+const schema = z.object({
+  username: z.string().nonempty('ユーザー名を入力してください').min(4, '4文字以上で入力してください'),
+})
+type Inputs = z.infer<typeof schema>
 
 /**
  * ユーザー編集モーダル
@@ -16,50 +24,57 @@ const EditModal: NextPage<{
   onClose: () => void
 }> = ({ isOpen, onClose }) => {
   const { t } = useLocale()
-  const [username, setUsername] = useState('')
+  // const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [isAdmin, setIsAdmin] = useState(false)
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Inputs>({ resolver: zodResolver(schema) })
+  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data)
+
+  console.log(errors)
 
   if (!isOpen) {
     return <></>
   }
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
-      <ModalTitle onClose={onClose}>
-        <UserPlusIcon className='mr-2 h-5' />
-        <span>{t('item_user_add')}</span>
-      </ModalTitle>
-      <div className='grid@main mb-4 p-2'>
-        <div className='col-span-12 p-2 sm:col-span-6'>
-          <Input
-            id='username'
-            value={username}
-            label={t('item_username')}
-            onChange={(e) => setUsername(e.target.value)}
-          />
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <ModalTitle onClose={onClose}>
+          <UserPlusIcon className='mr-2 h-5' />
+          <span>{t('item_user_add')}</span>
+        </ModalTitle>
+
+        <div className='grid@main mb-4 p-2'>
+          <div className='col-span-12 p-2 sm:col-span-6'>
+            <Input id='username' label={t('item_username')} {...register('username')} />
+          </div>
+          <div className='col-span-12 p-2 sm:col-span-6'>
+            <Input id='email' value={email} label={t('item_email')} onChange={(e) => setEmail(e.target.value)} />
+          </div>
+          <div className='col-span-12 p-2 sm:col-span-6'>
+            <Checkbox
+              id='isadmin'
+              value={isAdmin}
+              label={t('item_isadmin')}
+              onChange={() => setIsAdmin((prevState) => !prevState)}
+            />
+          </div>
         </div>
-        <div className='col-span-12 p-2 sm:col-span-6'>
-          <Input id='email' value={email} label={t('item_email')} onChange={(e) => setEmail(e.target.value)} />
-        </div>
-        <div className='col-span-12 p-2 sm:col-span-6'>
-          <Checkbox
-            id='isadmin'
-            value={isAdmin}
-            label={t('item_isadmin')}
-            onChange={() => setIsAdmin((prevState) => !prevState)}
-          />
-        </div>
-      </div>
-      <ModalAction>
-        <Button>
-          <CheckCircleIcon className='mr-1 h-5' />
-          {t('item_add')}
-        </Button>
-        <Button className='ml-4' theme='secondary' onClick={onClose}>
-          <XCircleIcon className='mr-1 h-5' />
-          {t('item_cancel')}
-        </Button>
-      </ModalAction>
+
+        <ModalAction className='flex-row-reverse'>
+          <Button type='submit'>
+            <CheckCircleIcon className='mr-1 h-5' />
+            {t('item_add')}
+          </Button>
+          <Button theme='secondary' onClick={onClose}>
+            <XCircleIcon className='mr-1 h-5' />
+            {t('item_cancel')}
+          </Button>
+        </ModalAction>
+      </form>
     </Modal>
   )
 }

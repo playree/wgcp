@@ -1,3 +1,4 @@
+import { cnjoin } from '@/utils/helpers'
 import { NextPage } from 'next'
 import React, { ReactNode } from 'react'
 
@@ -45,8 +46,13 @@ export const ModalTitle: NextPage<{
 
 export const ModalAction: NextPage<{
   children?: ReactNode
-}> = ({ children }) => {
-  return <div className='border@light relative flex items-center border-t px-4 py-2'>{children}</div>
+  className?: string
+}> = ({ children, className }) => {
+  return (
+    <div className={cnjoin('border@light relative flex items-center gap-4 border-t px-4 py-3', className)}>
+      {children}
+    </div>
+  )
 }
 
 export default Modal

@@ -1,31 +1,26 @@
 import { cnjoin } from '@/utils/helpers'
-import { NextPage } from 'next'
-import React from 'react'
+import React, { ComponentPropsWithoutRef, forwardRef } from 'react'
 
-export const Input: NextPage<{
-  className?: string
-  id: string
-  value: string | number
+type ChildProps = ComponentPropsWithoutRef<'input'> & {
   label: string
-  onChange?: React.ChangeEventHandler<HTMLInputElement>
-}> = ({ className, id, value, label, onChange }) => {
+}
+
+export const Input = forwardRef<HTMLInputElement, ChildProps>((props, ref) => {
   return (
     <div className='relative mt-2'>
       <input
-        type='text'
-        id={id}
-        value={value}
+        {...props}
+        ref={ref}
         placeholder=' '
-        onChange={onChange}
         className={cnjoin(
           'border@main peer block w-full appearance-none px-1 py-2.5 text-sm',
           'border-0 border-b-2 bg-transparent text-gray-900 dark:text-white',
           'focus:border-blue-400 focus:outline-none focus:ring-0',
-          className,
+          props.className,
         )}
       />
       <label
-        htmlFor={id}
+        htmlFor={props.id}
         className={cnjoin(
           'absolute top-3 origin-[0] -translate-y-6 scale-75 transform pl-0 text-sm duration-300',
           'text-gray-500 dark:text-gray-200',
@@ -33,10 +28,11 @@ export const Input: NextPage<{
           'peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-blue-500',
         )}
       >
-        {label}
+        {props.label}
       </label>
     </div>
   )
-}
+})
+Input.displayName = 'Input'
 
 export default Input

@@ -5,9 +5,10 @@ import React, { ReactNode } from 'react'
 export const Button: NextPage<{
   children?: ReactNode
   className?: string
+  type?: 'button' | 'submit' | 'reset' | undefined
   theme?: 'primary' | 'secondary' | 'noframe'
   onClick?: React.MouseEventHandler<HTMLButtonElement>
-}> = ({ children, className: _className, theme, onClick }) => {
+}> = ({ children, className: _className, type, theme, onClick }) => {
   let className = 'bg-blue-600 text-white hover:bg-blue-700'
   switch (theme) {
     case 'secondary':
@@ -22,6 +23,7 @@ export const Button: NextPage<{
 
   return (
     <button
+      type={type}
       className={cnjoin(
         'focus@ring flex items-center justify-center rounded px-3 py-1 font-medium',
         className,
