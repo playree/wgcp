@@ -24,9 +24,7 @@ const EditModal: NextPage<{
   onClose: () => void
 }> = ({ isOpen, onClose }) => {
   const { t } = useLocale()
-  // const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
-  const [isAdmin, setIsAdmin] = useState(false)
   const {
     register,
     handleSubmit,
@@ -55,12 +53,7 @@ const EditModal: NextPage<{
             <Input id='email' value={email} label={t('item_email')} onChange={(e) => setEmail(e.target.value)} />
           </div>
           <div className='col-span-12 p-2 sm:col-span-6'>
-            <Checkbox
-              id='isadmin'
-              value={isAdmin}
-              label={t('item_isadmin')}
-              onChange={() => setIsAdmin((prevState) => !prevState)}
-            />
+            <Checkbox id='isadmin' label={t('item_isadmin')} />
           </div>
         </div>
 
@@ -69,7 +62,7 @@ const EditModal: NextPage<{
             <CheckCircleIcon className='mr-1 h-5' />
             {t('item_add')}
           </Button>
-          <Button theme='secondary' onClick={onClose}>
+          <Button type='button' theme='secondary' onClick={onClose}>
             <XCircleIcon className='mr-1 h-5' />
             {t('item_cancel')}
           </Button>

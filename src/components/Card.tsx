@@ -1,15 +1,14 @@
 import { cnjoin } from '@/utils/helpers'
-import { NextPage } from 'next'
-import React, { ReactNode } from 'react'
+import React, { FC, ReactNode } from 'react'
 
-export const Card: NextPage<{
+export const Card: FC<{
   children?: ReactNode
   className?: string
 }> = ({ children, className }) => {
   return <div className={cnjoin('bg@light border@light rounded border p-4', className)}>{children}</div>
 }
 
-export const CardTitle: NextPage<{
+export const CardTitle: FC<{
   children?: ReactNode
   className?: string
 }> = ({ children, className }) => {

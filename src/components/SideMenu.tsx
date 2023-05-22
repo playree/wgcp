@@ -1,9 +1,8 @@
 import { cnjoin } from '@/utils/helpers'
-import { NextPage } from 'next'
 import Link from 'next/link'
-import React, { ReactNode, useState } from 'react'
+import React, { FC, ReactNode, useState } from 'react'
 
-const Bars3BottomLeftIcon: NextPage<{ className?: string }> = ({ className }) => {
+const Bars3BottomLeftIcon: FC<{ className?: string }> = ({ className }) => {
   return (
     <svg
       className={className}
@@ -22,7 +21,7 @@ const Bars3BottomLeftIcon: NextPage<{ className?: string }> = ({ className }) =>
   )
 }
 
-const CheckIcon: NextPage<{ className?: string }> = ({ className }) => {
+const CheckIcon: FC<{ className?: string }> = ({ className }) => {
   return (
     <svg
       className={className}
@@ -38,7 +37,7 @@ const CheckIcon: NextPage<{ className?: string }> = ({ className }) => {
   )
 }
 
-export const MenuButton: NextPage<{
+export const MenuButton: FC<{
   /** メニューテキスト */
   text: string
   /** 遷移先 */
@@ -77,7 +76,7 @@ export const MenuButton: NextPage<{
   )
 }
 
-export const MenuGroup: NextPage<{
+export const MenuGroup: FC<{
   /** テキスト */
   text: string
 }> = ({ text }) => {
@@ -91,7 +90,7 @@ export const MenuGroup: NextPage<{
 
 export type MenuContentType = (props: { select?: string | boolean; closeMenu: () => void }) => ReactNode
 
-export const SideMenu: NextPage<{
+export const SideMenu: FC<{
   children: ReactNode
   /** メニュー内容 */
   menu: MenuContentType

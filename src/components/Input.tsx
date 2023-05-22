@@ -1,11 +1,12 @@
 import { cnjoin } from '@/utils/helpers'
 import React, { ComponentPropsWithoutRef, forwardRef } from 'react'
 
-type ChildProps = ComponentPropsWithoutRef<'input'> & {
-  label: string
-}
-
-export const Input = forwardRef<HTMLInputElement, ChildProps>((props, ref) => {
+export const Input = forwardRef<
+  HTMLInputElement,
+  ComponentPropsWithoutRef<'input'> & {
+    label: string
+  }
+>((props, ref) => {
   return (
     <div className='relative mt-2'>
       <input

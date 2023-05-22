@@ -1,10 +1,10 @@
 import { signIn, useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
-import React, { useEffect } from 'react'
+import React, { FC, useEffect } from 'react'
 
 export const PATH_SIGNIN = '/auth/signin'
 
-export const AuthHandler: React.FC<{ children: JSX.Element }> = ({ children }) => {
+export const AuthHandler: FC<{ children: JSX.Element }> = ({ children }) => {
   const { status, data: session } = useSession()
   const router = useRouter()
   useEffect(() => {

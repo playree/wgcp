@@ -1,11 +1,10 @@
 import { cnjoin } from '@/utils/helpers'
-import { NextPage } from 'next'
-import React, { ReactNode } from 'react'
+import React, { FC, ReactNode } from 'react'
 
 import { Button } from './Button'
 import { XMarkIcon } from './icon'
 
-export const Modal: NextPage<{
+export const Modal: FC<{
   isOpen: boolean
   children?: ReactNode
   onClose?: () => void
@@ -30,7 +29,7 @@ export const Modal: NextPage<{
   )
 }
 
-export const ModalTitle: NextPage<{
+export const ModalTitle: FC<{
   children?: ReactNode
   onClose?: () => void
 }> = ({ children, onClose }) => {
@@ -44,7 +43,7 @@ export const ModalTitle: NextPage<{
   )
 }
 
-export const ModalAction: NextPage<{
+export const ModalAction: FC<{
   children?: ReactNode
   className?: string
 }> = ({ children, className }) => {

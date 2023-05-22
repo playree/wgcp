@@ -1,28 +1,21 @@
 import { cnjoin } from '@/utils/helpers'
-import { NextPage } from 'next'
-import React from 'react'
+import React, { ComponentPropsWithoutRef, forwardRef } from 'react'
 
-export const Checkbox: NextPage<{
-  className?: string
-  id: string
-  value: boolean
-  label: string
-  onChange?: React.ChangeEventHandler<HTMLInputElement>
-}> = ({ className, id, value, label, onChange }) => {
+export const Checkbox = forwardRef<
+  HTMLInputElement,
+  ComponentPropsWithoutRef<'input'> & {
+    label: string
+  }
+>((props, ref) => {
   return (
     <div className='flex items-center'>
-      <input
-        type='checkbox'
-        id={id}
-        checked={value}
-        onChange={onChange}
-        className={cnjoin('h-4 w-4 cursor-pointer', className)}
-      />
-      <label htmlFor={id} className='ml-2 cursor-pointer text-sm font-medium text-gray-900 dark:text-white'>
-        {label}
+      <input {...props} ref={ref} type='checkbox' className={cnjoin('h-4 w-4 cursor-pointer', props.className)} />
+      <label htmlFor={props.id} className='ml-2 cursor-pointer text-sm font-medium text-gray-900 dark:text-white'>
+        {props.label}
       </label>
     </div>
   )
-}
+})
+Checkbox.displayName = 'Checkbox'
 
 export default Checkbox

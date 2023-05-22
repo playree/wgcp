@@ -1,8 +1,7 @@
 import { cnjoin } from '@/utils/helpers'
-import { NextPage } from 'next'
-import React, { ReactNode } from 'react'
+import React, { FC, ReactNode } from 'react'
 
-export const Progress: NextPage<{
+export const Progress: FC<{
   children?: ReactNode
   progress: number
   className?: string

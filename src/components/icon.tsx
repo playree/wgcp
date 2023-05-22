@@ -1,11 +1,10 @@
-import { NextPage } from 'next'
-import React from 'react'
+import React, { FC } from 'react'
 
 //
 // Uses icons from https://heroicons.dev/
 //
 
-export const Squares2x2Icon: NextPage<{ className?: string }> = ({ className }) => {
+export const Squares2x2Icon: FC<{ className?: string }> = ({ className }) => {
   return (
     <svg
       className={className}
@@ -23,7 +22,7 @@ export const Squares2x2Icon: NextPage<{ className?: string }> = ({ className }) 
   )
 }
 
-export const UserCircleIcon: NextPage<{ className?: string }> = ({ className }) => {
+export const UserCircleIcon: FC<{ className?: string }> = ({ className }) => {
   return (
     <svg
       className={className}
@@ -41,7 +40,7 @@ export const UserCircleIcon: NextPage<{ className?: string }> = ({ className }) 
   )
 }
 
-export const UsersIcon: NextPage<{ className?: string }> = ({ className }) => {
+export const UsersIcon: FC<{ className?: string }> = ({ className }) => {
   return (
     <svg
       className={className}
@@ -55,7 +54,7 @@ export const UsersIcon: NextPage<{ className?: string }> = ({ className }) => {
   )
 }
 
-export const ArrowRightOnRectangleIcon: NextPage<{ className?: string }> = ({ className }) => {
+export const ArrowRightOnRectangleIcon: FC<{ className?: string }> = ({ className }) => {
   return (
     <svg
       className={className}
@@ -75,7 +74,7 @@ export const ArrowRightOnRectangleIcon: NextPage<{ className?: string }> = ({ cl
   )
 }
 
-export const Cog6ToothIcon: NextPage<{ className?: string }> = ({ className }) => {
+export const Cog6ToothIcon: FC<{ className?: string }> = ({ className }) => {
   return (
     <svg
       className={className}
@@ -96,7 +95,7 @@ export const Cog6ToothIcon: NextPage<{ className?: string }> = ({ className }) =
   )
 }
 
-export const GlobeAltIcon: NextPage<{ className?: string }> = ({ className }) => {
+export const GlobeAltIcon: FC<{ className?: string }> = ({ className }) => {
   return (
     <svg
       className={className}
@@ -116,7 +115,7 @@ export const GlobeAltIcon: NextPage<{ className?: string }> = ({ className }) =>
   )
 }
 
-export const IdentificationIcon: NextPage<{ className?: string }> = ({ className }) => {
+export const IdentificationIcon: FC<{ className?: string }> = ({ className }) => {
   return (
     <svg
       className={className}
@@ -136,7 +135,7 @@ export const IdentificationIcon: NextPage<{ className?: string }> = ({ className
   )
 }
 
-export const UserPlusIcon: NextPage<{ className?: string }> = ({ className }) => {
+export const UserPlusIcon: FC<{ className?: string }> = ({ className }) => {
   return (
     <svg
       className={className}
@@ -150,7 +149,7 @@ export const UserPlusIcon: NextPage<{ className?: string }> = ({ className }) =>
   )
 }
 
-export const XMarkIcon: NextPage<{ className?: string }> = ({ className }) => {
+export const XMarkIcon: FC<{ className?: string }> = ({ className }) => {
   return (
     <svg
       className={className}
@@ -166,7 +165,7 @@ export const XMarkIcon: NextPage<{ className?: string }> = ({ className }) => {
   )
 }
 
-export const CheckCircleIcon: NextPage<{ className?: string }> = ({ className }) => {
+export const CheckCircleIcon: FC<{ className?: string }> = ({ className }) => {
   return (
     <svg
       className={className}
@@ -186,7 +185,7 @@ export const CheckCircleIcon: NextPage<{ className?: string }> = ({ className })
   )
 }
 
-export const XCircleIcon: NextPage<{ className?: string }> = ({ className }) => {
+export const XCircleIcon: FC<{ className?: string }> = ({ className }) => {
   return (
     <svg
       className={className}
