@@ -16,6 +16,7 @@ type LocaleItem =
   | 'item_freemem'
   | 'item_uptime'
   | 'item_add'
+  | 'item_ok'
   | 'item_cancel'
   | 'item_username'
   | 'item_email'
@@ -81,6 +82,10 @@ const locales: Record<LocaleItem, { en: string; ja?: string }> = {
   item_add: {
     en: 'Add',
     ja: '追加',
+  },
+  item_ok: {
+    en: 'OK',
+    ja: 'OK',
   },
   item_cancel: {
     en: 'Cancel',

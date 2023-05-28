@@ -6,37 +6,80 @@ import { Modal, ModalAction, ModalTitle } from '@/components/Modal'
 import { CheckCircleIcon, UserPlusIcon, UsersIcon, XCircleIcon } from '@/components/icon'
 import { useLocale } from '@/utils/locale'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { NextPage } from 'next'
-import { useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 const schema = z.object({
   username: z.string().nonempty('ユーザー名を入力してください').min(4, '4文字以上で入力してください'),
+  email: z.string().email().optional().or(z.string().length(0)),
+  isAdmin: z.boolean(),
 })
 type Inputs = z.infer<typeof schema>
 
 /**
  * ユーザー編集モーダル
  */
-const EditModal: NextPage<{
+const EditModal: FC<{
   isOpen: boolean
   onClose: () => void
 }> = ({ isOpen, onClose }) => {
   const { t } = useLocale()
-  const [email, setEmail] = useState('')
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>({ resolver: zodResolver(schema) })
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data)
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    console.debug(data)
+    setDone(true)
+  }
+  const [isDone, setDone] = useState(false)
+
+  useEffect(() => {
+    console.debug('isOpen:', isOpen)
+    setDone(false)
+  }, [isOpen])
 
   console.log(errors)
+  console.log('isDone:', isDone)
 
   if (!isOpen) {
     return <></>
   }
+
+  if (isDone) {
+    return (
+      <Modal isOpen={isOpen} onClose={onClose} showWaiting>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <ModalTitle onClose={onClose}>
+            <UserPlusIcon className='mr-2 h-5' />
+            <span>{t('item_user_add')}</span>
+          </ModalTitle>
+
+          <div className='grid@main mb-4 p-2'>
+            <div className='col-span-12 p-2 sm:col-span-6'>
+              <Input id='username' label={t('item_username')} required {...register('username')} />
+            </div>
+            <div className='col-span-12 p-2 sm:col-span-6'>
+              <Input id='email' label={t('item_email')} {...register('email')} />
+            </div>
+            <div className='col-span-12 p-2 sm:col-span-6'>
+              <Checkbox id='isadmin' label={t('item_isadmin')} {...register('isAdmin')} />
+            </div>
+          </div>
+
+          <ModalAction className='flex-row-reverse'>
+            <Button type='button' onClick={onClose}>
+              <CheckCircleIcon className='mr-1 h-5' />
+              {t('item_ok')}
+            </Button>
+          </ModalAction>
+        </form>
+      </Modal>
+    )
+  }
+
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -47,13 +90,13 @@ const EditModal: NextPage<{
 
         <div className='grid@main mb-4 p-2'>
           <div className='col-span-12 p-2 sm:col-span-6'>
-            <Input id='username' label={t('item_username')} {...register('username')} />
+            <Input id='username' label={t('item_username')} required {...register('username')} />
           </div>
           <div className='col-span-12 p-2 sm:col-span-6'>
-            <Input id='email' value={email} label={t('item_email')} onChange={(e) => setEmail(e.target.value)} />
+            <Input id='email' label={t('item_email')} {...register('email')} />
           </div>
           <div className='col-span-12 p-2 sm:col-span-6'>
-            <Checkbox id='isadmin' label={t('item_isadmin')} />
+            <Checkbox id='isadmin' label={t('item_isadmin')} {...register('isAdmin')} />
           </div>
         </div>
 
@@ -74,13 +117,13 @@ const EditModal: NextPage<{
 
 const Users: NextPageCustom = () => {
   const { t } = useLocale()
-  const [isOpenEditModal, setIsOpenEditModal] = useState(false)
+  const [isOpenEditModal, setOpenEditModal] = useState(false)
   return (
     <main className='container@main grid@main'>
       <div className='col-span-12 flex items-center text-lg font-bold'>
         <UsersIcon className='ml-1 h-6' />
         <span className='ml-3 mr-6'>{t('menu_users')}</span>
-        <Button className='text-sm' onClick={() => setIsOpenEditModal(true)}>
+        <Button className='text-sm' onClick={() => setOpenEditModal(true)}>
           <UserPlusIcon className='mr-1 h-5' />
           <span>{t('item_add')}</span>
         </Button>
@@ -115,7 +158,7 @@ const Users: NextPageCustom = () => {
           </tr>
         </tbody>
       </table>
-      <EditModal isOpen={isOpenEditModal} onClose={() => setIsOpenEditModal(false)} />
+      <EditModal isOpen={isOpenEditModal} onClose={() => setOpenEditModal(false)} />
     </main>
   )
 }

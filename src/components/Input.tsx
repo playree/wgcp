@@ -7,6 +7,7 @@ export const Input = forwardRef<
     label: string
   }
 >((props, ref) => {
+  console.log(props)
   return (
     <div className='relative mt-2'>
       <input
@@ -27,6 +28,7 @@ export const Input = forwardRef<
           'text-gray-500 dark:text-gray-200',
           'peer-placeholder-shown:left-1 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100',
           'peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-blue-500',
+          props.required ? 'after:ml-1 after:font-bold after:text-red-500 after:content-["*"]' : '',
         )}
       >
         {props.label}

@@ -23,7 +23,7 @@ export const AuthHandler: FC<{ children: JSX.Element }> = ({ children }) => {
   return (
     <div className='flex h-screen w-screen items-center justify-center'>
       <div className='h-8 w-8 animate-spin rounded-xl bg-blue-600'></div>
-      <div className='ml-4'>Loading...</div>
+      <div className='ml-4 font-bold'>Loading...</div>
     </div>
   )
 }

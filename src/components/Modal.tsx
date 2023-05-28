@@ -8,7 +8,8 @@ export const Modal: FC<{
   isOpen: boolean
   children?: ReactNode
   onClose?: () => void
-}> = ({ isOpen, children, onClose }) => {
+  showWaiting?: boolean
+}> = ({ isOpen, children, onClose, showWaiting: showLoading }) => {
   if (!isOpen) {
     return <></>
   }
@@ -19,10 +20,20 @@ export const Modal: FC<{
     >
       <div className='m-8'>
         <div
-          className='mx-auto max-w-2xl rounded-xl bg-gray-100 dark:bg-gray-700'
+          className='relative mx-auto max-w-2xl rounded-xl bg-gray-100 dark:bg-gray-700'
           onClick={(event) => event.stopPropagation()}
         >
           {children}
+          <div
+            className={cnjoin(
+              'absolute left-0 top-0 flex h-full w-full items-center justify-center rounded-xl',
+              'bg-gray-900 bg-opacity-20 dark:bg-opacity-40',
+              showLoading ? '' : 'hidden',
+            )}
+          >
+            <div className='h-8 w-8 animate-spin rounded-xl bg-blue-600'></div>
+            <div className='ml-4 font-bold'>Please wait...</div>
+          </div>
         </div>
       </div>
     </div>
