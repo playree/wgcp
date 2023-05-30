@@ -1,7 +1,7 @@
-import { AppPropsCustom } from '@/common'
 import { AuthHandler } from '@/components/AuthHandler'
 import { Menu } from '@/components/Menu'
 import { SideMenu } from '@/components/SideMenu'
+import { AppPropsCustom } from '@/helpers/client'
 import '@/styles/globals.css'
 import { SessionProvider } from 'next-auth/react'
 import { ThemeProvider } from 'next-themes'

@@ -1,4 +1,4 @@
-import { cnjoin } from '@/utils/helpers'
+import { cnjoin } from '@/helpers/client'
 import React, { FC, ReactNode } from 'react'
 
 export const Card: FC<{

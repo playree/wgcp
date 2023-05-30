@@ -1,29 +1,10 @@
 import { authOptions } from '@/pages/api/auth/[...nextauth]'
 import { PrismaClient } from '@prisma/client'
-import type { NextApiRequest, NextApiResponse, NextPage } from 'next'
+import type { NextApiRequest, NextApiResponse } from 'next'
 import { Session } from 'next-auth'
 import { getServerSession } from 'next-auth/next'
-import type { AppProps } from 'next/app'
-
-// 共通部品
 
 export const prisma = new PrismaClient()
-
-// 画面共通部品
-
-export type NextPageCustom<P = Record<string, unknown>> = NextPage<
-  Record<string, Session | unknown> & P,
-  Record<string, Session | unknown> & P
-> & {
-  enableAuth?: boolean
-  enableSideMenu?: boolean | string
-}
-
-export type AppPropsCustom<P = Record<string, Session | null | undefined>> = AppProps<P> & {
-  Component: NextPageCustom<P>
-}
-
-// API共通部品
 
 export const getApiSession = async (req: NextApiRequest, res: NextApiResponse) => {
   return getServerSession(req, res, authOptions)

@@ -1,6 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import { wrapAuth } from '@/common'
-import { execCmdSync } from '@/utils/shellcmd'
+import { wrapAuth } from '@/helpers/server'
+import { execCmdSync } from '@/helpers/shellcmd'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import os from 'os'
 

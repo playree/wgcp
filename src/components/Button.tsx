@@ -1,4 +1,4 @@
-import { cnjoin } from '@/utils/helpers'
+import { cnjoin } from '@/helpers/client'
 import React, { ComponentPropsWithoutRef, ReactNode, forwardRef } from 'react'
 
 export const Button = forwardRef<

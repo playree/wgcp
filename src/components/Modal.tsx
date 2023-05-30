@@ -1,8 +1,8 @@
-import { cnjoin } from '@/utils/helpers'
+import { cnjoin } from '@/helpers/client'
 import React, { FC, ReactNode } from 'react'
 
 import { Button } from './Button'
-import { XMarkIcon } from './icon'
+import { XMarkIcon } from './Icons'
 
 export const Modal: FC<{
   isOpen: boolean

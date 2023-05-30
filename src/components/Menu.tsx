@@ -6,8 +6,8 @@ import {
   Squares2x2Icon,
   UserCircleIcon,
   UsersIcon,
-} from '@/components/icon'
-import { useLocale } from '@/utils/locale'
+} from '@/components/Icons'
+import { useLocale } from '@/helpers/locale'
 import { signOut as signOutAuth, useSession } from 'next-auth/react'
 import { useTheme } from 'next-themes'
 import { useRouter } from 'next/router'

@@ -1,8 +1,8 @@
-import { NextPageCustom } from '@/common'
 import { Card, CardTitle } from '@/components/Card'
 import { Progress } from '@/components/Progress'
-import { formatByte, formatPercent, formatTime } from '@/utils/format'
-import { useLocale } from '@/utils/locale'
+import { NextPageCustom } from '@/helpers/client'
+import { formatByte, formatPercent, formatTime } from '@/helpers/format'
+import { useLocale } from '@/helpers/locale'
 import { GetServerSideProps } from 'next'
 import os from 'os'
 
