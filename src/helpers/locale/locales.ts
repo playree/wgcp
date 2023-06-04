@@ -1,6 +1,4 @@
-import { useRouter } from 'next/router'
-
-type LocaleItem =
+export type LocaleItem =
   | 'menu_dashboard'
   | 'menu_users'
   | 'menu_settings'
@@ -22,7 +20,7 @@ type LocaleItem =
   | 'item_email'
   | 'item_isadmin'
 
-const locales: Record<LocaleItem, { en: string; ja?: string }> = {
+export const locales: Record<LocaleItem, { en: string; ja?: string }> = {
   menu_dashboard: {
     en: 'Dashboard',
     ja: 'ダッシュボード',
@@ -103,12 +101,4 @@ const locales: Record<LocaleItem, { en: string; ja?: string }> = {
     en: 'Is Administrater',
     ja: '管理者権限',
   },
-}
-
-export const useLocale = () => {
-  const { locale } = useRouter()
-  const t = (item: LocaleItem) => {
-    return locales[item][(locale as 'en' | 'ja') || 'en'] || ''
-  }
-  return { locale, t }
 }

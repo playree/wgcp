@@ -2,12 +2,19 @@ import { AuthHandler } from '@/components/AuthHandler'
 import { Menu } from '@/components/Menu'
 import { SideMenu } from '@/components/SideMenu'
 import { AppPropsCustom } from '@/helpers/client'
+import { useLocale } from '@/helpers/locale'
+import { setErrorMapLocale } from '@/helpers/locale/zod'
 import '@/styles/globals.css'
 import { SessionProvider } from 'next-auth/react'
 import { ThemeProvider } from 'next-themes'
 
 export const App = ({ Component, pageProps }: AppPropsCustom) => {
   let element = <Component {...pageProps} />
+
+  // エラーメッセージのロケール対応
+  const { et } = useLocale()
+  setErrorMapLocale(et)
+
   if (Component.enableSideMenu) {
     // サイドメニューを表示するページ
     element = (

@@ -4,18 +4,11 @@ import { CheckCircleIcon, UserPlusIcon, UsersIcon, XCircleIcon } from '@/compone
 import { Input } from '@/components/Input'
 import { Modal, ModalAction, ModalTitle } from '@/components/Modal'
 import { NextPageCustom } from '@/helpers/client'
-import { useLocale } from '@/helpers/locale'
+import { useLocale } from '@/helpers/locale/'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { FC, useEffect, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { z } from 'zod'
-
-const schema = z.object({
-  username: z.string().nonempty('ユーザー名を入力してください').min(4, '4文字以上で入力してください'),
-  email: z.string().email().optional().or(z.string().length(0)),
-  isAdmin: z.boolean(),
-})
-type Inputs = z.infer<typeof schema>
 
 /**
  * ユーザー編集モーダル
@@ -24,17 +17,25 @@ const EditModal: FC<{
   isOpen: boolean
   onClose: () => void
 }> = ({ isOpen, onClose }) => {
-  const { t } = useLocale()
+  const { t, et } = useLocale()
+  const [isDone, setDone] = useState(false)
+
+  const schema = z.object({
+    username: z.string().nonempty(et('@required_field')).min(4, '@username_invalid'),
+    email: z.string().email().optional().or(z.string().length(0)),
+    isAdmin: z.boolean(),
+  })
+  type Inputs = z.infer<typeof schema>
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>({ resolver: zodResolver(schema) })
+
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     console.debug(data)
     setDone(true)
   }
-  const [isDone, setDone] = useState(false)
 
   useEffect(() => {
     console.debug('isOpen:', isOpen)
@@ -59,7 +60,7 @@ const EditModal: FC<{
 
           <div className='grid@main mb-4 p-2'>
             <div className='col-span-12 p-2 sm:col-span-6'>
-              <Input id='username' label={t('item_username')} required {...register('username')} />
+              <Input id='username' label={t('item_username')} {...register('username')} />
             </div>
             <div className='col-span-12 p-2 sm:col-span-6'>
               <Input id='email' label={t('item_email')} {...register('email')} />
@@ -90,7 +91,7 @@ const EditModal: FC<{
 
         <div className='grid@main mb-4 p-2'>
           <div className='col-span-12 p-2 sm:col-span-6'>
-            <Input id='username' label={t('item_username')} required {...register('username')} />
+            <Input id='username' label={t('item_username')} {...register('username')} />
           </div>
           <div className='col-span-12 p-2 sm:col-span-6'>
             <Input id='email' label={t('item_email')} {...register('email')} />
