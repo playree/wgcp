@@ -4,7 +4,8 @@ import { CheckCircleIcon, UserPlusIcon, UsersIcon, XCircleIcon } from '@/compone
 import { Input } from '@/components/Input'
 import { Modal, ModalAction, ModalTitle } from '@/components/Modal'
 import { NextPageCustom } from '@/helpers/client'
-import { el, useLocale } from '@/helpers/locale/'
+import { useLocale } from '@/helpers/locale/'
+import { zEmail, zIsAdmin, zUsername } from '@/helpers/zobjects'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { FC, useEffect, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
@@ -21,30 +22,30 @@ const EditModal: FC<{
   const [isDone, setDone] = useState(false)
 
   const schema = z.object({
-    username: z.string().nonempty(el('@required_field')).min(4, '@username_invalid'),
-    email: z.string().email().optional().or(z.string().length(0)),
-    isAdmin: z.boolean(),
+    username: zUsername,
+    email: zEmail,
+    isAdmin: zIsAdmin,
   })
-  type Inputs = z.infer<typeof schema>
+  type FormData = z.infer<typeof schema>
+
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<Inputs>({ resolver: zodResolver(schema) })
+    watch,
+  } = useForm<FormData>({ resolver: zodResolver(schema) })
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
+  const onSubmit: SubmitHandler<FormData> = (data) => {
     console.debug('EditModal:submit:', data)
     setDone(true)
+    reset()
   }
 
   useEffect(() => {
-    console.debug('uuu')
     setDone(false)
     reset()
   }, [isOpen, reset])
-
-  console.debug('errors', errors)
 
   if (!isOpen) {
     return <></>
@@ -53,7 +54,7 @@ const EditModal: FC<{
   if (isDone) {
     // 登録完了
     return (
-      <Modal isOpen={isOpen} onClose={onClose} showWaiting>
+      <Modal isOpen={isOpen} showWaiting>
         <form onSubmit={handleSubmit(onSubmit)}>
           <ModalTitle onClose={onClose}>
             <UserPlusIcon className='mr-2 h-5' />
@@ -83,8 +84,10 @@ const EditModal: FC<{
     )
   }
 
+  watch()
+
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <ModalTitle onClose={onClose}>
           <UserPlusIcon className='mr-2 h-5' />
@@ -93,11 +96,10 @@ const EditModal: FC<{
 
         <div className='grid@main mb-4 p-2'>
           <div className='col-span-12 p-2 sm:col-span-6'>
-            <Input id='username' label={t('item_username')} {...register('username')} />
-            {errors.username ? fet(errors.username) : ''}
+            <Input id='username' label={t('item_username')} error={fet(errors.username)} {...register('username')} />
           </div>
           <div className='col-span-12 p-2 sm:col-span-6'>
-            <Input id='email' label={t('item_email')} {...register('email')} />
+            <Input id='email' label={t('item_email')} error={fet(errors.email)} {...register('email')} />
           </div>
           <div className='col-span-12 p-2 sm:col-span-6'>
             <Checkbox id='isadmin' label={t('item_isadmin')} {...register('isAdmin')} />
