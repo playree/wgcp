@@ -17,5 +17,25 @@ export const useLocale = () => {
     }
     return ''
   }
-  return { locale, t, et }
+  const fet = (fieldError?: { message?: string }) => {
+    if (fieldError) {
+      if (errorLocales[fieldError.message as ErrorLocaleItem]) {
+        return errorLocales[fieldError.message as ErrorLocaleItem][locale as 'en' | 'ja'] || ''
+      }
+    }
+    return undefined
+  }
+  return {
+    /** ロケール */
+    locale,
+    /** ロケール変換 */
+    t,
+    /** エラーロケール変換 */
+    et,
+    /** FieldErrorロケール変換 */
+    fet,
+  }
 }
+
+/** エラーロケール定義利用 */
+export const el = (item: ErrorLocaleItem) => item

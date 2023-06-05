@@ -7,7 +7,6 @@ export const Input = forwardRef<
     label: string
   }
 >((props, ref) => {
-  console.log(props)
   return (
     <div className='relative mt-2'>
       <input

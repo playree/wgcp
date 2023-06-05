@@ -4,7 +4,7 @@ import { CheckCircleIcon, UserPlusIcon, UsersIcon, XCircleIcon } from '@/compone
 import { Input } from '@/components/Input'
 import { Modal, ModalAction, ModalTitle } from '@/components/Modal'
 import { NextPageCustom } from '@/helpers/client'
-import { useLocale } from '@/helpers/locale/'
+import { el, useLocale } from '@/helpers/locale/'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { FC, useEffect, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
@@ -17,11 +17,11 @@ const EditModal: FC<{
   isOpen: boolean
   onClose: () => void
 }> = ({ isOpen, onClose }) => {
-  const { t, et } = useLocale()
+  const { t, fet } = useLocale()
   const [isDone, setDone] = useState(false)
 
   const schema = z.object({
-    username: z.string().nonempty(et('@required_field')).min(4, '@username_invalid'),
+    username: z.string().nonempty(el('@required_field')).min(4, '@username_invalid'),
     email: z.string().email().optional().or(z.string().length(0)),
     isAdmin: z.boolean(),
   })
@@ -30,26 +30,28 @@ const EditModal: FC<{
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<Inputs>({ resolver: zodResolver(schema) })
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    console.debug(data)
+    console.debug('EditModal:submit:', data)
     setDone(true)
   }
 
   useEffect(() => {
-    console.debug('isOpen:', isOpen)
+    console.debug('uuu')
     setDone(false)
-  }, [isOpen])
+    reset()
+  }, [isOpen, reset])
 
-  console.log(errors)
-  console.log('isDone:', isDone)
+  console.debug('errors', errors)
 
   if (!isOpen) {
     return <></>
   }
 
   if (isDone) {
+    // 登録完了
     return (
       <Modal isOpen={isOpen} onClose={onClose} showWaiting>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -92,6 +94,7 @@ const EditModal: FC<{
         <div className='grid@main mb-4 p-2'>
           <div className='col-span-12 p-2 sm:col-span-6'>
             <Input id='username' label={t('item_username')} {...register('username')} />
+            {errors.username ? fet(errors.username) : ''}
           </div>
           <div className='col-span-12 p-2 sm:col-span-6'>
             <Input id='email' label={t('item_email')} {...register('email')} />
