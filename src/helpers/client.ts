@@ -16,4 +16,8 @@ export type AppPropsCustom<P = Record<string, Session | null | undefined>> = App
   Component: NextPageCustom<P>
 }
 
+/** className結合用 */
 export const cnjoin = (...className: (string | undefined)[]) => className.join(' ')
+
+/** フォーム進捗 */
+export type FormProgress = 'Ready' | 'Submited' | 'Done' | 'Error'

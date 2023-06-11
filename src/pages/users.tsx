@@ -3,7 +3,7 @@ import { Checkbox } from '@/components/Checkbox'
 import { CheckCircleIcon, UserPlusIcon, UsersIcon, XCircleIcon } from '@/components/Icons'
 import { Input } from '@/components/Input'
 import { Modal, ModalAction, ModalTitle } from '@/components/Modal'
-import { NextPageCustom } from '@/helpers/client'
+import { FormProgress, NextPageCustom } from '@/helpers/client'
 import { useLocale } from '@/helpers/locale/'
 import { zEmail, zIsAdmin, zUsername } from '@/helpers/zobjects'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -19,7 +19,7 @@ const EditModal: FC<{
   onClose: () => void
 }> = ({ isOpen, onClose }) => {
   const { t, fet } = useLocale()
-  const [isDone, setDone] = useState(false)
+  const [formProgress, setFormProgress] = useState<FormProgress>('Ready')
 
   const schema = z.object({
     username: zUsername,
@@ -36,14 +36,15 @@ const EditModal: FC<{
     watch,
   } = useForm<FormData>({ resolver: zodResolver(schema) })
 
-  const onSubmit: SubmitHandler<FormData> = (data) => {
+  const onSubmit: SubmitHandler<FormData> = async (data) => {
     console.debug('EditModal:submit:', data)
-    setDone(true)
+
+    setFormProgress('Done')
     reset()
   }
 
   useEffect(() => {
-    setDone(false)
+    setFormProgress('Ready')
     reset()
   }, [isOpen, reset])
 
@@ -51,7 +52,7 @@ const EditModal: FC<{
     return <></>
   }
 
-  if (isDone) {
+  if (formProgress === 'Done') {
     // 登録完了
     return (
       <Modal isOpen={isOpen} showWaiting>

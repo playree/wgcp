@@ -4,8 +4,8 @@ import { execCmdSync } from '@/helpers/shellcmd'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import os from 'os'
 
-const handler = wrapAuth(
-  async (
+const handler = wrapAuth({
+  GET: async (
     req: NextApiRequest,
     res: NextApiResponse<{
       timestamp: number
@@ -24,5 +24,5 @@ const handler = wrapAuth(
       uptime: os.uptime(),
     })
   },
-)
+})
 export default handler
