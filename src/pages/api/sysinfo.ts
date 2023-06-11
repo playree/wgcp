@@ -1,10 +1,10 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import { wrapAuth } from '@/helpers/server'
+import { wrapHandleAuth } from '@/helpers/server'
 import { execCmdSync } from '@/helpers/shellcmd'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import os from 'os'
 
-const handler = wrapAuth({
+const handler = wrapHandleAuth({
   GET: async (
     req: NextApiRequest,
     res: NextApiResponse<{

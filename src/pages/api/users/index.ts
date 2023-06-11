@@ -1,9 +1,15 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import { HandlerWithAuth, wrapAuth } from '@/helpers/server'
+import { HandlerAuth, wrapHandleAuth, wrapZodAuth } from '@/helpers/server'
+import { scUserCreate, zodReq } from '@/helpers/zobjects'
 
-const createUser: HandlerWithAuth = async (req, res) => {
-  res.status(200).json({ test: 'ok' })
+const createUser: HandlerAuth<{
+  username: string
+}> = async (req, res) => {
+  res.status(200).json({ username: 'ok' })
 }
 
-const handler = wrapAuth({ POST: createUser })
+const test = wrapZodAuth(zodReq({ query: scUserCreate }), async (req, res) => {
+  res.status(200).json({ username: 'ok' })
+})
+
+const handler = wrapHandleAuth({ GET: test, POST: createUser })
 export default handler
