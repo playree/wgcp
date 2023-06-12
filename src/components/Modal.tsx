@@ -18,7 +18,7 @@ export const Modal: FC<{
       className='fixed left-0 top-0 h-full w-full bg-gray-900 bg-opacity-50 dark:bg-opacity-80 lg:pl-64'
       onClick={onClose}
     >
-      <div className='m-8'>
+      <div className='m-4 mt-16'>
         <div
           className='relative mx-auto max-w-2xl rounded-xl bg-gray-100 dark:bg-gray-700'
           onClick={(event) => event.stopPropagation()}
