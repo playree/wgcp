@@ -5,7 +5,7 @@ import { Input } from '@/components/Input'
 import { Modal, ModalAction, ModalTitle } from '@/components/Modal'
 import { FormProgress, NextPageCustom } from '@/helpers/client'
 import { useLocale } from '@/helpers/locale/'
-import { zEmail, zIsAdmin, zUsername } from '@/helpers/zobjects'
+import { scUserCreate } from '@/helpers/zobjects'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { FC, useEffect, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
@@ -21,20 +21,14 @@ const EditModal: FC<{
   const { t, fet } = useLocale()
   const [formProgress, setFormProgress] = useState<FormProgress>('Ready')
 
-  const schema = z.object({
-    username: zUsername,
-    email: zEmail,
-    isAdmin: zIsAdmin,
-  })
-  type FormData = z.infer<typeof schema>
+  type FormData = z.infer<typeof scUserCreate>
 
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-    watch,
-  } = useForm<FormData>({ resolver: zodResolver(schema) })
+  } = useForm<FormData>({ resolver: zodResolver(scUserCreate), mode: 'onChange' })
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     console.debug('EditModal:submit:', data)
@@ -84,8 +78,6 @@ const EditModal: FC<{
       </Modal>
     )
   }
-
-  watch()
 
   return (
     <Modal isOpen={isOpen}>

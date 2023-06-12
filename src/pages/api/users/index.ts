@@ -1,4 +1,4 @@
-import { HandlerAuth, wrapHandleAuth, wrapZodAuth } from '@/helpers/server'
+import { HandlerAuth, handleAuthZod, wrapHandleAuth } from '@/helpers/server'
 import { scUserCreate, zodReq } from '@/helpers/zobjects'
 
 const createUser: HandlerAuth<{
@@ -7,7 +7,7 @@ const createUser: HandlerAuth<{
   res.status(200).json({ username: 'ok' })
 }
 
-const test = wrapZodAuth(zodReq({ query: scUserCreate }), async (req, res) => {
+const test = handleAuthZod(zodReq({ query: scUserCreate }), async (req, res) => {
   res.status(200).json({ username: 'ok' })
 })
 

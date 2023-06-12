@@ -12,4 +12,6 @@ export const zIsAdmin = z.boolean()
 
 export const scUserCreate = z.object({
   username: zUsername,
+  email: zEmail,
+  isAdmin: zIsAdmin,
 })

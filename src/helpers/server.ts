@@ -22,12 +22,12 @@ export const resError = (res: NextApiResponse, code: number, message: string, de
 export type Handler<R = unknown> = (req: NextApiRequest, res: NextApiResponse<R>) => void
 
 /**
- * Zodバリデーションのハンドラーラップ
+ * Zodバリデーション付きハンドラー
  * @param schema スキーマ定義
  * @param next ハンドラー
  * @returns
  */
-export const wrapZod = <T extends ZodSchema>(
+export const handleZod = <T extends ZodSchema>(
   schema: T,
   next: (req: Omit<NextApiRequest, 'query' | 'body'> & z.infer<T>, res: NextApiResponse) => void,
 ) => {
@@ -60,12 +60,12 @@ export const wrapHandle = (handlerMap: Partial<Record<HttpMethod, Handler>>) => 
 export type HandlerAuth<R = unknown> = (req: NextApiRequest, res: NextApiResponse<R>, session: Session) => void
 
 /**
- * Zodバリデーションのハンドラー(認証あり)ラップ
+ * Zodバリデーション付きハンドラー(認証あり)
  * @param schema スキーマ定義
  * @param next ハンドラー(認証あり)
  * @returns
  */
-export const wrapZodAuth = <T extends ZodSchema>(
+export const handleAuthZod = <T extends ZodSchema>(
   schema: T,
   next: (req: Omit<NextApiRequest, 'query' | 'body'> & z.infer<T>, res: NextApiResponse, session: Session) => void,
 ) => {
