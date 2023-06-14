@@ -1,6 +1,6 @@
-import { AuthHandler } from '@/components/AuthHandler'
 import { Menu } from '@/components/Menu'
-import { SideMenu } from '@/components/SideMenu'
+import { AuthHandler } from '@/components/nexkit/auth/AuthHandler'
+import { SideMenu } from '@/components/nexkit/ui/SideMenu'
 import { AppPropsCustom } from '@/helpers/client'
 import '@/styles/globals.css'
 import { SessionProvider } from 'next-auth/react'

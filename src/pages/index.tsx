@@ -1,5 +1,5 @@
-import { Card, CardTitle } from '@/components/Card'
-import { Progress } from '@/components/Progress'
+import { Card, CardTitle } from '@/components/nexkit/ui/Card'
+import { Progress } from '@/components/nexkit/ui/Progress'
 import { NextPageCustom } from '@/helpers/client'
 import { formatByte, formatPercent, formatTime } from '@/helpers/format'
 import { useLocale } from '@/helpers/locale'

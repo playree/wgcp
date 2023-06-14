@@ -1,8 +1,23 @@
-import { cnjoin } from '@/helpers/client'
 import React, { FC, ReactNode } from 'react'
 
 import { Button } from './Button'
-import { XMarkIcon } from './Icons'
+import { cnjoin } from './utils'
+
+const XMarkIcon: FC<{ className?: string }> = ({ className }) => {
+  return (
+    <svg
+      className={className}
+      fill='none'
+      stroke='currentColor'
+      strokeWidth={3}
+      viewBox='0 0 24 24'
+      xmlns='http://www.w3.org/2000/svg'
+      aria-hidden='true'
+    >
+      <path strokeLinecap='round' strokeLinejoin='round' d='M6 18L18 6M6 6l12 12' />
+    </svg>
+  )
+}
 
 export const Modal: FC<{
   isOpen: boolean

@@ -1,6 +1,7 @@
-import { cnjoin } from '@/helpers/client'
 import Link from 'next/link'
 import React, { ComponentPropsWithoutRef, FC, ReactNode, forwardRef } from 'react'
+
+import { cnjoin } from './utils'
 
 const getClassName = (theme?: 'primary' | 'secondary' | 'noframe', _className?: string) => {
   let className = 'bg-blue-600 text-white hover:bg-blue-700 disabled:bg-gray-500 disabled:text-gray-300'

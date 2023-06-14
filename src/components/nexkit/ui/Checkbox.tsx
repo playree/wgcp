@@ -1,5 +1,6 @@
-import { cnjoin } from '@/helpers/client'
 import React, { ComponentPropsWithoutRef, forwardRef } from 'react'
+
+import { cnjoin } from './utils'
 
 export const Checkbox = forwardRef<
   HTMLInputElement,

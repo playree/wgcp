@@ -1,5 +1,6 @@
-import { cnjoin } from '@/helpers/client'
 import React, { FC, ReactNode } from 'react'
+
+import { cnjoin } from './utils'
 
 export const Progress: FC<{
   children?: ReactNode

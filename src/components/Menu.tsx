@@ -13,7 +13,7 @@ import { useTheme } from 'next-themes'
 import { useRouter } from 'next/router'
 import React, { ChangeEvent, useState } from 'react'
 
-import { MenuButton, MenuContentType, MenuGroup } from './SideMenu'
+import { MenuButton, MenuContentType, MenuGroup } from './nexkit/ui/SideMenu'
 
 /**
  * サイドメニュー

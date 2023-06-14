@@ -1,6 +1,7 @@
-import { cnjoin } from '@/helpers/client'
 import Link from 'next/link'
 import React, { FC, ReactNode, useState } from 'react'
+
+import { cnjoin } from './utils'
 
 const Bars3BottomLeftIcon: FC<{ className?: string }> = ({ className }) => {
   return (
