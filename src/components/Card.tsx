@@ -12,7 +12,14 @@ export const CardTitle: FC<{
   children?: ReactNode
   className?: string
 }> = ({ children, className }) => {
-  return <div className={cnjoin('border-g border@light mb-4 border-b pb-1 text-lg', className)}>{children}</div>
+  return <div className={cnjoin('border-g border@light mb-4 border-b pb-1 text-xl', className)}>{children}</div>
+}
+
+export const CardAction: FC<{
+  children?: ReactNode
+  className?: string
+}> = ({ children, className }) => {
+  return <div className={cnjoin('relative mt-4 flex items-center gap-4 px-4', className)}>{children}</div>
 }
 
 export default Card
