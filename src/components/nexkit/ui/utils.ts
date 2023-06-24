@@ -1,2 +1,2 @@
-/** className結合用 */
-export const cnjoin = (...className: (string | undefined)[]) => className.join(' ')
+/** className結合用(スペース区切りでJOIN) */
+export const jc = (...classNames: (string | undefined)[]) => classNames.join(' ')

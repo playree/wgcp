@@ -1,6 +1,6 @@
 import React, { ComponentPropsWithoutRef, forwardRef } from 'react'
 
-import { cnjoin } from './utils'
+import { jc } from './utils'
 
 export const Checkbox = forwardRef<
   HTMLInputElement,
@@ -10,7 +10,7 @@ export const Checkbox = forwardRef<
 >((props, ref) => {
   return (
     <div className='flex items-center'>
-      <input {...props} ref={ref} type='checkbox' className={cnjoin('h-4 w-4 cursor-pointer', props.className)} />
+      <input {...props} ref={ref} type='checkbox' className={jc('h-4 w-4 cursor-pointer', props.className)} />
       <label htmlFor={props.id} className='ml-2 cursor-pointer text-sm font-medium text-gray-900 dark:text-white'>
         {props.label}
       </label>

@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import React, { FC, ReactNode, useState } from 'react'
 
-import { cnjoin } from './utils'
+import { jc } from './utils'
 
 const Bars3BottomLeftIcon: FC<{ className?: string }> = ({ className }) => {
   return (
@@ -117,7 +117,7 @@ export const SideMenu: FC<{
 
       <nav // サイドメニュー
         id='side-menu'
-        className={cnjoin(
+        className={jc(
           'fixed left-0 top-0 z-40 h-screen w-64 -translate-x-full transition-transform',
           isOpen ? 'transform-none' : 'lg:translate-x-0',
         )}
@@ -127,7 +127,7 @@ export const SideMenu: FC<{
         </div>
       </nav>
       <div
-        className={cnjoin('fixed inset-0 z-30 bg-gray-900 bg-opacity-50 dark:bg-opacity-80', isOpen ? '' : 'hidden')}
+        className={jc('fixed inset-0 z-30 bg-gray-900 bg-opacity-50 dark:bg-opacity-80', isOpen ? '' : 'hidden')}
         onClick={closeMenu}
       ></div>
 

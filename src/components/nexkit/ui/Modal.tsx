@@ -1,7 +1,8 @@
 import React, { FC, ReactNode } from 'react'
 
 import { Button } from './Button'
-import { cnjoin } from './utils'
+import { borderStyles } from './styles'
+import { jc } from './utils'
 
 const XMarkIcon: FC<{ className?: string }> = ({ className }) => {
   return (
@@ -40,7 +41,7 @@ export const Modal: FC<{
         >
           {children}
           <div
-            className={cnjoin(
+            className={jc(
               'absolute left-0 top-0 flex h-full w-full items-center justify-center rounded-xl',
               'bg-gray-900 bg-opacity-20 dark:bg-opacity-40',
               showLoading ? '' : 'hidden',
@@ -60,7 +61,7 @@ export const ModalTitle: FC<{
   onClose?: () => void
 }> = ({ children, onClose }) => {
   return (
-    <div className='border@light relative flex items-center border-b px-4 py-2 text-lg font-bold'>
+    <div className={jc(borderStyles.light, 'relative flex items-center border-b px-4 py-2 text-lg font-bold')}>
       <Button theme='noframe' className='absolute right-0 mr-2' onClick={onClose}>
         <XMarkIcon className='h-4' />
       </Button>
@@ -74,7 +75,7 @@ export const ModalAction: FC<{
   className?: string
 }> = ({ children, className }) => {
   return (
-    <div className={cnjoin('border@light relative flex items-center gap-4 border-t px-4 py-3', className)}>
+    <div className={jc(borderStyles.light, 'relative flex items-center gap-4 border-t px-4 py-3', className)}>
       {children}
     </div>
   )
