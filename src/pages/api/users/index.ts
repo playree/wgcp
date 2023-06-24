@@ -1,5 +1,5 @@
+import { scUserCreate, zodReq } from '@/helpers/schema'
 import { HandlerAuth, handleAuthZod, wrapHandleAuth } from '@/helpers/server'
-import { scUserCreate, zodReq } from '@/helpers/zobjects'
 
 const createUser: HandlerAuth<{
   username: string

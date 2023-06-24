@@ -27,9 +27,9 @@ export type Handler<R = unknown> = (req: NextApiRequest, res: NextApiResponse<R>
  * @param next ハンドラー
  * @returns
  */
-export const handleZod = <T extends ZodSchema>(
+export const handleZod = <R = unknown, T extends ZodSchema = ZodSchema>(
   schema: T,
-  next: (req: Omit<NextApiRequest, 'query' | 'body'> & z.infer<T>, res: NextApiResponse) => void,
+  next: (req: Omit<NextApiRequest, 'query' | 'body'> & z.infer<T>, res: NextApiResponse<R>) => void,
 ) => {
   return async (req: NextApiRequest, res: NextApiResponse) => {
     const parsed = schema.safeParse(req)
@@ -48,7 +48,7 @@ export const handleZod = <T extends ZodSchema>(
 export const wrapHandle = (handlerMap: Partial<Record<HttpMethod, Handler>>) => {
   return async (req: NextApiRequest, res: NextApiResponse) => {
     for (const [method, handler] of Object.entries(handlerMap)) {
-      if (req.method === method) {
+      if (req.method?.toUpperCase() === method) {
         return handler(req, res)
       }
     }
@@ -65,9 +65,9 @@ export type HandlerAuth<R = unknown> = (req: NextApiRequest, res: NextApiRespons
  * @param next ハンドラー(認証あり)
  * @returns
  */
-export const handleAuthZod = <T extends ZodSchema>(
+export const handleAuthZod = <R = unknown, T extends ZodSchema = ZodSchema>(
   schema: T,
-  next: (req: Omit<NextApiRequest, 'query' | 'body'> & z.infer<T>, res: NextApiResponse, session: Session) => void,
+  next: (req: Omit<NextApiRequest, 'query' | 'body'> & z.infer<T>, res: NextApiResponse<R>, session: Session) => void,
 ) => {
   return async (req: NextApiRequest, res: NextApiResponse, session: Session) => {
     const parsed = schema.safeParse(req)
@@ -94,7 +94,7 @@ export const wrapHandleAuth = (handlerMap: Partial<Record<HttpMethod, HandlerAut
       return resError(res, 403, 'Permission denied')
     }
     for (const [method, handler] of Object.entries(handlerMap)) {
-      if (req.method === method) {
+      if (req.method?.toUpperCase() === method) {
         return handler(req, res, session)
       }
     }
