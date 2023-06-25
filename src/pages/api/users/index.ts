@@ -1,15 +1,16 @@
-import { scUserCreate, zodReq } from '@/helpers/schema'
-import { HandlerAuth, handleAuthZod, wrapHandleAuth } from '@/helpers/server'
+import { TypeUserCreate, scUserCreate } from '@/helpers/schema'
+import { handleAuthZod, wrapHandleAuth } from '@/helpers/server'
+import { NextApiResponse } from 'next'
+import { z } from 'zod'
 
-const createUser: HandlerAuth<{
-  username: string
-}> = async (req, res) => {
-  res.status(200).json({ username: 'ok' })
-}
+const createUser = handleAuthZod(
+  z.object({
+    body: scUserCreate,
+  }),
+  async (req, res: NextApiResponse<TypeUserCreate>) => {
+    res.status(200).json(req.body)
+  },
+)
 
-const test = handleAuthZod(zodReq({ query: scUserCreate }), async (req, res) => {
-  res.status(200).json({ username: 'ok' })
-})
-
-const handler = wrapHandleAuth({ GET: test, POST: createUser })
+const handler = wrapHandleAuth({ POST: createUser })
 export default handler

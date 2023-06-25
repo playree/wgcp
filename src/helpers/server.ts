@@ -27,9 +27,9 @@ export type Handler<R = unknown> = (req: NextApiRequest, res: NextApiResponse<R>
  * @param next ハンドラー
  * @returns
  */
-export const handleZod = <R = unknown, T extends ZodSchema = ZodSchema>(
+export const handleZod = <T extends ZodSchema = ZodSchema>(
   schema: T,
-  next: (req: Omit<NextApiRequest, 'query' | 'body'> & z.infer<T>, res: NextApiResponse<R>) => void,
+  next: (req: Omit<NextApiRequest, 'query' | 'body'> & z.infer<T>, res: NextApiResponse) => void,
 ) => {
   return async (req: NextApiRequest, res: NextApiResponse) => {
     const parsed = schema.safeParse(req)
@@ -65,9 +65,9 @@ export type HandlerAuth<R = unknown> = (req: NextApiRequest, res: NextApiRespons
  * @param next ハンドラー(認証あり)
  * @returns
  */
-export const handleAuthZod = <R = unknown, T extends ZodSchema = ZodSchema>(
+export const handleAuthZod = <T extends ZodSchema = ZodSchema>(
   schema: T,
-  next: (req: Omit<NextApiRequest, 'query' | 'body'> & z.infer<T>, res: NextApiResponse<R>, session: Session) => void,
+  next: (req: Omit<NextApiRequest, 'query' | 'body'> & z.infer<T>, res: NextApiResponse, session: Session) => void,
 ) => {
   return async (req: NextApiRequest, res: NextApiResponse, session: Session) => {
     const parsed = schema.safeParse(req)

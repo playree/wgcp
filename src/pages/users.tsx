@@ -5,11 +5,10 @@ import { Input } from '@/components/nexkit/ui/Input'
 import { Modal, ModalAction, ModalTitle } from '@/components/nexkit/ui/Modal'
 import { FormProgress, NextPageCustom } from '@/helpers/client'
 import { useLocale } from '@/helpers/locale/'
-import { scUserCreate } from '@/helpers/schema'
+import { TypeUserCreate, scUserCreate } from '@/helpers/schema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { FC, useEffect, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { z } from 'zod'
 
 /**
  * ユーザー編集モーダル
@@ -21,16 +20,14 @@ const EditModal: FC<{
   const { t, fet } = useLocale()
   const [formProgress, setFormProgress] = useState<FormProgress>('Ready')
 
-  type FormData = z.infer<typeof scUserCreate>
-
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<FormData>({ resolver: zodResolver(scUserCreate), mode: 'onChange' })
+  } = useForm<TypeUserCreate>({ resolver: zodResolver(scUserCreate), mode: 'onChange' })
 
-  const onSubmit: SubmitHandler<FormData> = async (data) => {
+  const onSubmit: SubmitHandler<TypeUserCreate> = async (data) => {
     console.debug('EditModal:submit:', data)
 
     setFormProgress('Done')
