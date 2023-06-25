@@ -2,30 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  @apply bg-white text-gray-900 dark:bg-black dark:text-white;
-}
-
-@layer components {
-  .container\@main {
-    @apply relative mx-auto max-w-3xl;
+@layer base {
+  html {
+    font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, Roboto, 'Segoe UI', 'Helvetica Neue', HelveticaNeue,
+      '游ゴシック体', YuGothic, '游ゴシック Medium', 'Yu Gothic Medium', '游ゴシック', 'Yu Gothic', Verdana, 'メイリオ',
+      Meiryo, sans-serif;
   }
-  .grid\@main {
-    @apply grid grid-cols-12 gap-2;
-  }
-  .focus\@ring {
-    @apply focus:outline-none focus:ring-2 focus:ring-blue-400;
-  }
-  .text\@light {
-    @apply text-gray-700 dark:text-gray-400;
-  }
-  .bg\@light {
-    @apply bg-gray-50 dark:bg-gray-900;
-  }
-  .border\@main {
-    @apply border-gray-400;
-  }
-  .border\@light {
-    @apply border-gray-300 dark:border-gray-600;
+  body {
+    @apply bg-white text-gray-900 dark:bg-black dark:text-white;
   }
 }

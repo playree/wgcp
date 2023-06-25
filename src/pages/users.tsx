@@ -3,10 +3,13 @@ import { Button } from '@/components/nexkit/ui/Button'
 import { Checkbox } from '@/components/nexkit/ui/Checkbox'
 import { Input } from '@/components/nexkit/ui/Input'
 import { Modal, ModalAction, ModalTitle } from '@/components/nexkit/ui/Modal'
+import { bgStyles, borderStyles, containerStyles, gridStyles } from '@/components/nexkit/ui/styles'
+import { jc } from '@/components/nexkit/ui/utils'
 import { FormProgress, NextPageCustom } from '@/helpers/client'
 import { useLocale } from '@/helpers/locale/'
 import { TypeUserCreate, scUserCreate } from '@/helpers/schema'
 import { zodResolver } from '@hookform/resolvers/zod'
+import Head from 'next/head'
 import { FC, useEffect, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
@@ -53,7 +56,7 @@ const EditModal: FC<{
             <span>{t('item_user_add')}</span>
           </ModalTitle>
 
-          <div className='grid@main mb-4 p-2'>
+          <div className={jc(gridStyles.default, 'mb-4 p-2')}>
             <div className='col-span-12 p-2 sm:col-span-6'>
               <Input id='username' label={t('item_username')} {...register('username')} />
             </div>
@@ -84,7 +87,7 @@ const EditModal: FC<{
           <span>{t('item_user_add')}</span>
         </ModalTitle>
 
-        <div className='grid@main mb-4 p-2'>
+        <div className={jc(gridStyles.default, 'mb-4 p-2')}>
           <div className='col-span-12 p-2 sm:col-span-6'>
             <Input id='username' label={t('item_username')} error={fet(errors.username)} {...register('username')} />
           </div>
@@ -115,7 +118,10 @@ const Users: NextPageCustom = () => {
   const { t } = useLocale()
   const [isOpenEditModal, setOpenEditModal] = useState(false)
   return (
-    <main className='container@main grid@main'>
+    <main className={jc(containerStyles.default, gridStyles.default)}>
+      <Head>
+        <title>WGCP - {t('menu_users')}</title>
+      </Head>
       <div className='col-span-12 flex items-center text-lg font-bold'>
         <UsersIcon className='ml-1 h-6' />
         <span className='ml-3 mr-6'>{t('menu_users')}</span>
@@ -132,23 +138,23 @@ const Users: NextPageCustom = () => {
           </tr>
         </thead>
         <tbody>
-          <tr className='bg@light border@light border-b'>
+          <tr className={jc(bgStyles.light, borderStyles.light, 'border-b')}>
             <td className='p-2'>test</td>
             <td className='p-2'>ok</td>
           </tr>
-          <tr className='bg@light border@light border-b'>
+          <tr className={jc(bgStyles.light, borderStyles.light, 'border-b')}>
             <td className='p-2'>test2</td>
             <td className='p-2'>ng</td>
           </tr>
-          <tr className='bg@light border@light border-b'>
+          <tr className={jc(bgStyles.light, borderStyles.light, 'border-b')}>
             <td className='p-2'>test2</td>
             <td className='p-2'>ng</td>
           </tr>
-          <tr className='bg@light border@light border-b'>
+          <tr className={jc(bgStyles.light, borderStyles.light, 'border-b')}>
             <td className='p-2'>test2</td>
             <td className='p-2'>ng</td>
           </tr>
-          <tr className='bg@light border@light border-b'>
+          <tr className={jc(bgStyles.light, borderStyles.light, 'border-b')}>
             <td className='p-2'>test2</td>
             <td className='p-2'>ng</td>
           </tr>
