@@ -16,7 +16,9 @@ export type LocaleItem =
   | 'item_add'
   | 'item_ok'
   | 'item_cancel'
+  | 'item_signin'
   | 'item_username'
+  | 'item_password'
   | 'item_email'
   | 'item_isadmin'
 
@@ -89,9 +91,17 @@ export const locales: Record<LocaleItem, { en: string; ja?: string }> = {
     en: 'Cancel',
     ja: 'キャンセル',
   },
+  item_signin: {
+    en: 'Sign In',
+    ja: 'サインイン',
+  },
   item_username: {
     en: 'User Name',
     ja: 'ユーザー名',
+  },
+  item_password: {
+    en: 'Password',
+    ja: 'パスワード',
   },
   item_email: {
     en: 'Email',

@@ -14,7 +14,11 @@ export const CardTitle: FC<{
   children?: ReactNode
   className?: string
 }> = ({ children, className }) => {
-  return <div className={jc(borderStyles.light, 'border-g mb-4 border-b pb-1 text-xl', className)}>{children}</div>
+  return (
+    <div className={jc(borderStyles.light, 'border-g mb-4 flex items-center border-b pb-1 text-xl', className)}>
+      {children}
+    </div>
+  )
 }
 
 export const CardAction: FC<{

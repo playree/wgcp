@@ -14,6 +14,8 @@ export const authOptions: NextAuthOptions = {
         console.debug('authorize:', credentials)
         const name = credentials?.username
         const password = credentials?.password || ''
+
+        // パスワード認証
         const user = await prisma.user.findUnique({ where: { name } })
         if (!user) {
           return null
@@ -25,6 +27,9 @@ export const authOptions: NextAuthOptions = {
       },
     }),
   ],
+  pages: {
+    signIn: '/auth/signin',
+  },
   callbacks: {
     async signIn(param) {
       console.debug('signIn:', param)
@@ -36,6 +41,7 @@ export const authOptions: NextAuthOptions = {
         if (user) {
           session.user.id = user.id
           session.user.name = user.name
+          session.user.isNotInit = user.isNotInit
           session.user.isAdmin = user.isAdmin
           session.user.email = user.email
           console.debug('session.user:', session.user)

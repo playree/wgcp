@@ -14,7 +14,8 @@ model User {
   id           String   @id @default(uuid())
   name         String   @unique
   passwordHash String
-  isAdmin      Boolean
+  isNotInit    Boolean  @default(true)
+  isAdmin      Boolean  @default(false)
   email        String?  @unique
   updatedAt    DateTime @updatedAt
   createdAt    DateTime @default(now())
