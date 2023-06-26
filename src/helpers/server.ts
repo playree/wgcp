@@ -1,18 +1,14 @@
 import { authOptions } from '@/pages/api/auth/[...nextauth]'
-import { PrismaClient } from '@prisma/client'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { Session } from 'next-auth'
 import { getServerSession } from 'next-auth/next'
 import { ZodSchema, z } from 'zod'
 
-export const prisma = new PrismaClient()
+import { HttpMethod } from './http'
 
 export const getApiSession = async (req: NextApiRequest, res: NextApiResponse) => {
   return getServerSession(req, res, authOptions)
 }
-
-/** HTTPメソッド定義 */
-export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE'
 
 export const resError = (res: NextApiResponse, code: number, message: string, detail?: object) => {
   return res.status(code).json({ error: { code, message, detail } })
@@ -68,8 +64,12 @@ export type HandlerAuth<R = unknown> = (req: NextApiRequest, res: NextApiRespons
 export const handleAuthZod = <T extends ZodSchema = ZodSchema>(
   schema: T,
   next: (req: Omit<NextApiRequest, 'query' | 'body'> & z.infer<T>, res: NextApiResponse, session: Session) => void,
+  requreAdmin = false,
 ) => {
   return async (req: NextApiRequest, res: NextApiResponse, session: Session) => {
+    if (requreAdmin && !session.user.isAdmin) {
+      return resError(res, 403, 'Permission denied')
+    }
     const parsed = schema.safeParse(req)
     if (!parsed.success) {
       return resError(res, 400, 'Bad Request', JSON.parse(parsed.error.message))

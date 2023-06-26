@@ -6,8 +6,10 @@ import { Modal, ModalAction, ModalTitle } from '@/components/nexkit/ui/Modal'
 import { bgStyles, borderStyles, containerStyles, gridStyles } from '@/components/nexkit/ui/styles'
 import { jc } from '@/components/nexkit/ui/utils'
 import { FormProgress, NextPageCustom } from '@/helpers/client'
+import { fetchJson } from '@/helpers/http'
 import { useLocale } from '@/helpers/locale/'
 import { TypeUserCreate, scUserCreate } from '@/helpers/schema'
+import type { ResSelectUsers, User } from '@/pages/api/users'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Head from 'next/head'
 import { FC, useEffect, useState } from 'react'
@@ -117,12 +119,39 @@ const EditModal: FC<{
 const Users: NextPageCustom = () => {
   const { t } = useLocale()
   const [isOpenEditModal, setOpenEditModal] = useState(false)
+  const [users, setUsers] = useState<User[]>([])
+
+  const updateUsers = () => {
+    fetchJson<ResSelectUsers>('/api/users', {
+      response: ({ users }) => {
+        setUsers([...users])
+      },
+    })
+  }
+
+  useEffect(() => {
+    updateUsers()
+  }, [])
+
+  const viewUsers = () => {
+    const userRows = []
+    for (const user of users) {
+      userRows.push(
+        <tr key={`user_${user.id}`} className={jc(bgStyles.light, borderStyles.light, 'border-b')}>
+          <td className='p-2'>{user.name}</td>
+          <td className='p-2'>{user.isAdmin ? 'ok' : 'ng'}</td>
+        </tr>,
+      )
+    }
+    return userRows
+  }
+
   return (
     <main className={jc(containerStyles.default, gridStyles.default)}>
       <Head>
         <title>WGCP - {t('menu_users')}</title>
       </Head>
-      <div className='col-span-12 flex items-center text-lg font-bold'>
+      <div className='col-span-12 ml-8 flex items-center text-lg font-bold md:ml-0'>
         <UsersIcon className='ml-1 h-6' />
         <span className='ml-3 mr-6'>{t('menu_users')}</span>
         <Button className='text-sm' onClick={() => setOpenEditModal(true)}>
@@ -137,28 +166,7 @@ const Users: NextPageCustom = () => {
             <th className='sticky top-0 bg-gray-200 p-2 dark:bg-gray-700'>is admin</th>
           </tr>
         </thead>
-        <tbody>
-          <tr className={jc(bgStyles.light, borderStyles.light, 'border-b')}>
-            <td className='p-2'>test</td>
-            <td className='p-2'>ok</td>
-          </tr>
-          <tr className={jc(bgStyles.light, borderStyles.light, 'border-b')}>
-            <td className='p-2'>test2</td>
-            <td className='p-2'>ng</td>
-          </tr>
-          <tr className={jc(bgStyles.light, borderStyles.light, 'border-b')}>
-            <td className='p-2'>test2</td>
-            <td className='p-2'>ng</td>
-          </tr>
-          <tr className={jc(bgStyles.light, borderStyles.light, 'border-b')}>
-            <td className='p-2'>test2</td>
-            <td className='p-2'>ng</td>
-          </tr>
-          <tr className={jc(bgStyles.light, borderStyles.light, 'border-b')}>
-            <td className='p-2'>test2</td>
-            <td className='p-2'>ng</td>
-          </tr>
-        </tbody>
+        <tbody>{viewUsers()}</tbody>
       </table>
       <EditModal isOpen={isOpenEditModal} onClose={() => setOpenEditModal(false)} />
     </main>
