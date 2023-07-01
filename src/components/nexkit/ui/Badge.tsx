@@ -1,6 +1,5 @@
 import React, { FC, ReactNode } from 'react'
-
-import { jc } from './utils'
+import { twMerge as tm } from 'tailwind-merge'
 
 type Theme = 'blue' | 'red' | 'green' | 'yellow'
 
@@ -17,5 +16,5 @@ export const Badge: FC<{
   theme?: Theme
 }> = ({ children, className: _className, theme }) => {
   const className = 'text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full'
-  return <span className={jc(className, themeStyles[theme || 'blue'], _className)}>{children}</span>
+  return <span className={tm(className, themeStyles[theme || 'blue'], _className)}>{children}</span>
 }

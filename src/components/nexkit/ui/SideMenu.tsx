@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import React, { FC, ReactNode, useState } from 'react'
-
-import { jc } from './utils'
+import { twMerge as tm } from 'tailwind-merge'
 
 const Bars3BottomLeftIcon: FC<{ className?: string }> = ({ className }) => {
   return (
@@ -117,7 +116,7 @@ export const SideMenu: FC<{
 
       <nav // サイドメニュー
         id='side-menu'
-        className={jc(
+        className={tm(
           'fixed left-0 top-0 z-40 h-screen w-64 -translate-x-full transition-transform',
           isOpen ? 'transform-none' : 'lg:translate-x-0',
         )}
@@ -127,7 +126,7 @@ export const SideMenu: FC<{
         </div>
       </nav>
       <div
-        className={jc('fixed inset-0 z-30 bg-gray-900 bg-opacity-50 dark:bg-opacity-80', isOpen ? '' : 'hidden')}
+        className={tm('fixed inset-0 z-30 bg-gray-900 bg-opacity-50 dark:bg-opacity-80', isOpen ? '' : 'hidden')}
         onClick={closeMenu}
       ></div>
 

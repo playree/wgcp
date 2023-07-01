@@ -3,7 +3,6 @@ import { Button } from '@/components/nexkit/ui/Button'
 import { Card, CardTitle } from '@/components/nexkit/ui/Card'
 import { Input } from '@/components/nexkit/ui/Input'
 import { gridStyles } from '@/components/nexkit/ui/styles'
-import { jc } from '@/components/nexkit/ui/utils'
 import { NextPageCustom } from '@/helpers/client'
 import { useLocale } from '@/helpers/locale'
 import { TypeSignin, scSignin } from '@/helpers/schema'
@@ -12,6 +11,7 @@ import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { twMerge as tm } from 'tailwind-merge'
 
 const SignIn: NextPageCustom = () => {
   const router = useRouter()
@@ -51,7 +51,7 @@ const SignIn: NextPageCustom = () => {
         </CardTitle>
         {isAuthNg && (
           <div
-            className={jc(
+            className={tm(
               'mb-4 flex items-center border-t-4 px-4 py-2',
               'border-red-300 bg-red-50 text-red-800 dark:border-red-800 dark:bg-gray-800 dark:text-red-400',
             )}

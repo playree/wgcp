@@ -1,13 +1,18 @@
 import { Menu } from '@/components/Menu'
 import { AuthHandler } from '@/components/nexkit/auth/AuthHandler'
 import { SideMenu } from '@/components/nexkit/ui/SideMenu'
+import { ToastProvider } from '@/components/nexkit/ui/Toast'
 import { AppPropsCustom } from '@/helpers/client'
 import '@/styles/globals.css'
 import { SessionProvider } from 'next-auth/react'
 import { ThemeProvider } from 'next-themes'
 
 export const App = ({ Component, pageProps }: AppPropsCustom) => {
-  let element = <Component {...pageProps} />
+  let element = (
+    <ToastProvider>
+      <Component {...pageProps} />
+    </ToastProvider>
+  )
 
   if (Component.enableSideMenu) {
     // サイドメニューを表示するページ

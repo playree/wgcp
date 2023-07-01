@@ -1,6 +1,8 @@
 import { FC, ReactNode, createContext, useEffect, useState } from 'react'
+import { twMerge as tm } from 'tailwind-merge'
 
-import { jc } from './utils'
+import { Button } from './Button'
+import { textStyles } from './styles'
 
 const InformationCircleIcon: FC<{ className?: string }> = ({ className }) => {
   return (
@@ -22,8 +24,24 @@ const InformationCircleIcon: FC<{ className?: string }> = ({ className }) => {
   )
 }
 
+const XMarkIcon: FC<{ className?: string }> = ({ className }) => {
+  return (
+    <svg
+      className={className}
+      fill='none'
+      stroke='currentColor'
+      strokeWidth={3}
+      viewBox='0 0 24 24'
+      xmlns='http://www.w3.org/2000/svg'
+      aria-hidden='true'
+    >
+      <path strokeLinecap='round' strokeLinejoin='round' d='M6 18L18 6M6 6l12 12' />
+    </svg>
+  )
+}
+
 type MessageObj = {
-  id: number
+  id: string
   message: string
 }
 
@@ -35,7 +53,6 @@ export const ToastContext = createContext(
 )
 
 let tid: NodeJS.Timer
-let cnt = 0
 
 export const ToastProvider: FC<{
   children?: ReactNode
@@ -55,7 +72,11 @@ export const ToastProvider: FC<{
   }, [messageList])
 
   const setToast = (message: string) => {
-    setMessageList([...messageList, { id: cnt++, message }])
+    setMessageList([...messageList, { id: window.crypto.randomUUID(), message }])
+  }
+
+  const removeToast = (id: string) => {
+    setMessageList(messageList.filter((value) => value.id !== id))
   }
 
   const showMessage = (msgList: MessageObj[]) => {
@@ -65,13 +86,22 @@ export const ToastProvider: FC<{
       list.push(
         <div
           key={`toast_${msg.id}`}
-          className={jc(
-            'z-50 mt-2 flex items-center',
-            'rounded-lg bg-blue-50 p-4 text-gray-500 shadow dark:bg-gray-900 dark:text-gray-400',
+          className={tm(
+            'relative z-20 mt-2 flex items-center text-sm',
+            'rounded-lg bg-blue-100 p-4 text-gray-500 opacity-80 shadow dark:bg-gray-800 dark:text-gray-400',
           )}
         >
           <InformationCircleIcon className='mr-1 h-5' />
-          <span>{msg.message}</span>
+          <div>{msg.message}</div>
+          <Button
+            theme='noframe'
+            className={tm(textStyles.light, 'ml-2')}
+            onClick={() => {
+              removeToast(msg.id)
+            }}
+          >
+            <XMarkIcon className='h-4' />
+          </Button>
         </div>,
       )
     }

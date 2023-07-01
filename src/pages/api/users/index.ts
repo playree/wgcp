@@ -12,6 +12,9 @@ export type ResSelectUsers = {
   users: User[]
 }
 
+/**
+ * ユーザー一覧
+ */
 const selectUsers = handleAuthZod(z.object({}), async (req, res: NextApiResponse<ResSelectUsers>) => {
   const users = await prisma.user.findMany({
     select: { id: true, name: true, isAdmin: true, email: true, updatedAt: true, createdAt: true },
@@ -20,6 +23,9 @@ const selectUsers = handleAuthZod(z.object({}), async (req, res: NextApiResponse
   res.status(200).json({ users })
 })
 
+/**
+ * ユーザー作成
+ */
 const createUser = handleAuthZod(
   z.object({
     body: scUserCreate,

@@ -3,8 +3,8 @@ import { Button } from '@/components/nexkit/ui/Button'
 import { Checkbox } from '@/components/nexkit/ui/Checkbox'
 import { Input } from '@/components/nexkit/ui/Input'
 import { Modal, ModalAction, ModalTitle } from '@/components/nexkit/ui/Modal'
+import { ToastContext } from '@/components/nexkit/ui/Toast'
 import { bgStyles, borderStyles, containerStyles, gridStyles } from '@/components/nexkit/ui/styles'
-import { jc } from '@/components/nexkit/ui/utils'
 import { FormProgress, NextPageCustom } from '@/helpers/client'
 import { fetchJson } from '@/helpers/http'
 import { useLocale } from '@/helpers/locale/'
@@ -12,8 +12,11 @@ import { TypeUserCreate, scUserCreate } from '@/helpers/schema'
 import type { ResSelectUsers, User } from '@/pages/api/users'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Head from 'next/head'
-import { FC, useEffect, useState } from 'react'
+import { FC, useContext, useEffect, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { twMerge as tm } from 'tailwind-merge'
+
+let ti = 0
 
 /**
  * ユーザー編集モーダル
@@ -23,6 +26,7 @@ const EditModal: FC<{
   onClose: () => void
 }> = ({ isOpen, onClose }) => {
   const { t, fet } = useLocale()
+  const { setToast } = useContext(ToastContext)
   const [formProgress, setFormProgress] = useState<FormProgress>('Ready')
 
   const {
@@ -35,8 +39,9 @@ const EditModal: FC<{
   const onSubmit: SubmitHandler<TypeUserCreate> = async (data) => {
     console.debug('EditModal:submit:', data)
 
-    setFormProgress('Done')
-    reset()
+    // setFormProgress('Done')
+    setToast(`abc${ti++}`)
+    // reset()
   }
 
   useEffect(() => {
@@ -51,14 +56,14 @@ const EditModal: FC<{
   if (formProgress === 'Done') {
     // 登録完了
     return (
-      <Modal isOpen={isOpen} showWaiting>
+      <Modal isOpen={isOpen}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <ModalTitle onClose={onClose}>
             <UserPlusIcon className='mr-2 h-5' />
             <span>{t('item_user_add')}</span>
           </ModalTitle>
 
-          <div className={jc(gridStyles.default, 'mb-4 p-2')}>
+          <div className={tm(gridStyles.default, 'mb-4 p-2')}>
             <div className='col-span-12 p-2 sm:col-span-6'>
               <Input id='username' label={t('item_username')} {...register('username')} />
             </div>
@@ -89,7 +94,7 @@ const EditModal: FC<{
           <span>{t('item_user_add')}</span>
         </ModalTitle>
 
-        <div className={jc(gridStyles.default, 'mb-4 p-2')}>
+        <div className={tm(gridStyles.default, 'mb-4 p-2')}>
           <div className='col-span-12 p-2 sm:col-span-6'>
             <Input id='username' label={t('item_username')} error={fet(errors.username)} {...register('username')} />
           </div>
@@ -137,7 +142,7 @@ const Users: NextPageCustom = () => {
     const userRows = []
     for (const user of users) {
       userRows.push(
-        <tr key={`user_${user.id}`} className={jc(bgStyles.light, borderStyles.light, 'border-b')}>
+        <tr key={`user_${user.id}`} className={tm(bgStyles.light, borderStyles.light, 'border-b')}>
           <td className='p-2'>{user.name}</td>
           <td className='p-2'>{user.isAdmin ? 'ok' : 'ng'}</td>
         </tr>,
@@ -147,7 +152,7 @@ const Users: NextPageCustom = () => {
   }
 
   return (
-    <main className={jc(containerStyles.default, gridStyles.default)}>
+    <main className={tm(containerStyles.default, gridStyles.default)}>
       <Head>
         <title>WGCP - {t('menu_users')}</title>
       </Head>

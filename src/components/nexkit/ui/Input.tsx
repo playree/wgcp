@@ -1,7 +1,7 @@
 import React, { ComponentPropsWithoutRef, forwardRef } from 'react'
+import { twMerge as tm } from 'tailwind-merge'
 
 import { borderStyles } from './styles'
-import { jc } from './utils'
 
 export const Input = forwardRef<
   HTMLInputElement,
@@ -17,7 +17,7 @@ export const Input = forwardRef<
         {...props}
         ref={ref}
         placeholder=' '
-        className={jc(
+        className={tm(
           borderStyles.default,
           'peer block w-full appearance-none px-1 py-2.5 text-sm',
           'border-0 border-b-2 bg-transparent text-gray-900 dark:text-white',
@@ -28,7 +28,7 @@ export const Input = forwardRef<
       />
       <label
         htmlFor={props.id}
-        className={jc(
+        className={tm(
           'absolute top-3 origin-[0] -translate-y-6 scale-75 transform pl-0 text-sm duration-300',
           'text-gray-500 dark:text-gray-200',
           'peer-placeholder-shown:left-1 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100',

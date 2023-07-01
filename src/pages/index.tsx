@@ -1,13 +1,13 @@
 import { Card, CardTitle } from '@/components/nexkit/ui/Card'
 import { Progress } from '@/components/nexkit/ui/Progress'
 import { containerStyles, gridStyles } from '@/components/nexkit/ui/styles'
-import { jc } from '@/components/nexkit/ui/utils'
 import { NextPageCustom } from '@/helpers/client'
 import { formatByte, formatPercent, formatTime } from '@/helpers/format'
 import { useLocale } from '@/helpers/locale'
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import os from 'os'
+import { twMerge as tm } from 'tailwind-merge'
 
 type Props = {
   sysinfo: {
@@ -32,7 +32,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async () => {
 const Home: NextPageCustom<Props> = (props) => {
   const { t } = useLocale()
   return (
-    <main className={jc(containerStyles.default, gridStyles.default)}>
+    <main className={tm(containerStyles.default, gridStyles.default)}>
       <Head>
         <title>WGCP - {t('menu_dashboard')}</title>
       </Head>
@@ -51,7 +51,7 @@ const Home: NextPageCustom<Props> = (props) => {
         </div>
       </Card>
 
-      <Card className={jc(gridStyles.default, 'col-span-12 sm:col-span-6')}></Card>
+      <Card className={tm(gridStyles.default, 'col-span-12 sm:col-span-6')}></Card>
     </main>
   )
 }
