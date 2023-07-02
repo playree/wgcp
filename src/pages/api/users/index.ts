@@ -23,6 +23,9 @@ const selectUsers = handleAuthZod(z.object({}), async (req, res: NextApiResponse
   res.status(200).json({ users })
 })
 
+export type ReqCreateUser = TypeUserCreate
+export type ResCreateUser = TypeUserCreate
+
 /**
  * ユーザー作成
  */
@@ -30,7 +33,7 @@ const createUser = handleAuthZod(
   z.object({
     body: scUserCreate,
   }),
-  async (req, res: NextApiResponse<TypeUserCreate>) => {
+  async (req, res: NextApiResponse<ResCreateUser>) => {
     res.status(200).json(req.body)
   },
 )

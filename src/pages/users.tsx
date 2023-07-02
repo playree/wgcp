@@ -1,4 +1,4 @@
-import { CheckCircleIcon, UserPlusIcon, UsersIcon, XCircleIcon } from '@/components/Icons'
+import { CheckCircleIcon, KeyIcon, UserPlusIcon, UsersIcon, XCircleIcon } from '@/components/Icons'
 import { Button } from '@/components/nexkit/ui/Button'
 import { Checkbox } from '@/components/nexkit/ui/Checkbox'
 import { Input } from '@/components/nexkit/ui/Input'
@@ -8,15 +8,16 @@ import { bgStyles, borderStyles, containerStyles, gridStyles } from '@/component
 import { FormProgress, NextPageCustom } from '@/helpers/client'
 import { fetchJson } from '@/helpers/http'
 import { useLocale } from '@/helpers/locale/'
-import { TypeUserCreate, scUserCreate } from '@/helpers/schema'
-import type { ResSelectUsers, User } from '@/pages/api/users'
+import { scUserCreate } from '@/helpers/schema'
+import type { ReqCreateUser, ResCreateUser, ResSelectUsers, User } from '@/pages/api/users'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { customAlphabet } from 'nanoid'
 import Head from 'next/head'
 import { FC, useContext, useEffect, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { twMerge as tm } from 'tailwind-merge'
 
-let ti = 0
+const nanoid = customAlphabet('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-=@#$%&', 10)
 
 /**
  * ユーザー編集モーダル
@@ -34,14 +35,21 @@ const EditModal: FC<{
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<TypeUserCreate>({ resolver: zodResolver(scUserCreate), mode: 'onChange' })
+    setValue,
+  } = useForm<ReqCreateUser>({ resolver: zodResolver(scUserCreate), mode: 'onChange' })
 
-  const onSubmit: SubmitHandler<TypeUserCreate> = async (data) => {
+  const onSubmit: SubmitHandler<ReqCreateUser> = async (data) => {
     console.debug('EditModal:submit:', data)
-
-    // setFormProgress('Done')
-    setToast(`abc${ti++}`)
-    // reset()
+    setFormProgress('Submited')
+    fetchJson<ResCreateUser>('/api/users', {
+      method: 'POST',
+      body: data,
+      response: (data) => {
+        setToast(`${data.username} を作成しました`)
+        setFormProgress('Done')
+        onClose()
+      },
+    })
   }
 
   useEffect(() => {
@@ -53,41 +61,8 @@ const EditModal: FC<{
     return <></>
   }
 
-  if (formProgress === 'Done') {
-    // 登録完了
-    return (
-      <Modal isOpen={isOpen}>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <ModalTitle onClose={onClose}>
-            <UserPlusIcon className='mr-2 h-5' />
-            <span>{t('item_user_add')}</span>
-          </ModalTitle>
-
-          <div className={tm(gridStyles.default, 'mb-4 p-2')}>
-            <div className='col-span-12 p-2 sm:col-span-6'>
-              <Input id='username' label={t('item_username')} {...register('username')} />
-            </div>
-            <div className='col-span-12 p-2 sm:col-span-6'>
-              <Input id='email' label={t('item_email')} {...register('email')} />
-            </div>
-            <div className='col-span-12 p-2 sm:col-span-6'>
-              <Checkbox id='isadmin' label={t('item_isadmin')} {...register('isAdmin')} />
-            </div>
-          </div>
-
-          <ModalAction className='flex-row-reverse'>
-            <Button type='button' onClick={onClose}>
-              <CheckCircleIcon className='mr-1 h-5' />
-              {t('item_ok')}
-            </Button>
-          </ModalAction>
-        </form>
-      </Modal>
-    )
-  }
-
   return (
-    <Modal isOpen={isOpen}>
+    <Modal isOpen={isOpen} showWaiting={formProgress !== 'Ready'}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <ModalTitle onClose={onClose}>
           <UserPlusIcon className='mr-2 h-5' />
@@ -96,10 +71,41 @@ const EditModal: FC<{
 
         <div className={tm(gridStyles.default, 'mb-4 p-2')}>
           <div className='col-span-12 p-2 sm:col-span-6'>
-            <Input id='username' label={t('item_username')} error={fet(errors.username)} {...register('username')} />
+            <Input
+              id='username'
+              label={t('item_username')}
+              error={fet(errors.username)}
+              {...register('username')}
+              required
+            />
           </div>
           <div className='col-span-12 p-2 sm:col-span-6'>
             <Input id='email' label={t('item_email')} error={fet(errors.email)} {...register('email')} />
+          </div>
+          <div className='col-span-8 p-2 sm:col-span-6'>
+            <Input
+              id='password'
+              type='password'
+              label={t('item_password')}
+              error={fet(errors.password)}
+              {...register('password')}
+              required
+            />
+          </div>
+          <div className='col-span-4 p-2 sm:col-span-6'>
+            <Button
+              type='button'
+              theme='noframe'
+              className='mt-4'
+              onClick={() => {
+                const pass = nanoid()
+                console.debug('gen pass:', pass)
+                setValue('password', pass)
+              }}
+            >
+              <KeyIcon className='mr-1 h-5' />
+              {t('item_generate')}
+            </Button>
           </div>
           <div className='col-span-12 p-2 sm:col-span-6'>
             <Checkbox id='isadmin' label={t('item_isadmin')} {...register('isAdmin')} />

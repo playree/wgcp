@@ -21,6 +21,7 @@ export type LocaleItem =
   | 'item_password'
   | 'item_email'
   | 'item_isadmin'
+  | 'item_generate'
 
 export const locales: Record<LocaleItem, { en: string; ja?: string }> = {
   menu_dashboard: {
@@ -110,5 +111,9 @@ export const locales: Record<LocaleItem, { en: string; ja?: string }> = {
   item_isadmin: {
     en: 'Is Administrater',
     ja: '管理者権限',
+  },
+  item_generate: {
+    en: 'Generate',
+    ja: '自動生成',
   },
 }

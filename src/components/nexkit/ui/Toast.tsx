@@ -72,7 +72,7 @@ export const ToastProvider: FC<{
   }, [messageList])
 
   const setToast = (message: string) => {
-    setMessageList([...messageList, { id: window.crypto.randomUUID(), message }])
+    setMessageList([...messageList, { id: crypto.randomUUID(), message }])
   }
 
   const removeToast = (id: string) => {
