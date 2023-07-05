@@ -1,6 +1,8 @@
 /** HTTPメソッド定義 */
 export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE'
 
+export const DEFAULT_WAIT = 200
+
 export const fetchJson = <T>(
   url: string,
   param: {
@@ -8,6 +10,7 @@ export const fetchJson = <T>(
     body?: Record<string, unknown>
     response?: (res: T) => void
     error?: (err: Error) => void
+    wait?: number
   },
 ) => {
   const method = param.method || 'GET'
@@ -29,8 +32,17 @@ export const fetchJson = <T>(
         throw new Error(data.statusText)
       }
       const res = await data.json()
-      if (param.response) {
-        param.response(res)
+
+      if (param.wait) {
+        setTimeout(() => {
+          if (param.response) {
+            param.response(res)
+          }
+        }, param.wait)
+      } else {
+        if (param.response) {
+          param.response(res)
+        }
       }
     })
     .catch((err) => {

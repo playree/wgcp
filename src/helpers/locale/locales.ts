@@ -9,6 +9,7 @@ export type LocaleItem =
   | 'group_admin'
   | 'item_user'
   | 'item_user_add'
+  | 'item_user_info'
   | 'item_admin'
   | 'item_systeminfo'
   | 'item_freemem'
@@ -22,6 +23,9 @@ export type LocaleItem =
   | 'item_email'
   | 'item_isadmin'
   | 'item_generate'
+  | 'item_generate'
+  | 'msg_password_confirm'
+  | 'msg_user_add_complete'
 
 export const locales: Record<LocaleItem, { en: string; ja?: string }> = {
   menu_dashboard: {
@@ -63,6 +67,10 @@ export const locales: Record<LocaleItem, { en: string; ja?: string }> = {
   item_user_add: {
     en: 'Add User',
     ja: 'ユーザー追加',
+  },
+  item_user_info: {
+    en: 'User information',
+    ja: 'ユーザー情報',
   },
   item_admin: {
     en: 'Administrator',
@@ -115,5 +123,13 @@ export const locales: Record<LocaleItem, { en: string; ja?: string }> = {
   item_generate: {
     en: 'Generate',
     ja: '自動生成',
+  },
+  msg_password_confirm: {
+    en: 'The password can be confirmed only once on the completion screen.',
+    ja: 'パスワードは完了画面で一度だけ確認できます。',
+  },
+  msg_user_add_complete: {
+    en: 'User addition is complete.',
+    ja: 'ユーザーの追加が完了しました。',
   },
 }

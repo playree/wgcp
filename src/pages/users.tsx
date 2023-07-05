@@ -1,12 +1,13 @@
-import { CheckCircleIcon, KeyIcon, UserPlusIcon, UsersIcon, XCircleIcon } from '@/components/Icons'
+import { CheckIcon, KeyIcon, UserPlusIcon, UsersIcon, XMarkIcon } from '@/components/Icons'
 import { Button } from '@/components/nexkit/ui/Button'
 import { Checkbox } from '@/components/nexkit/ui/Checkbox'
 import { Input } from '@/components/nexkit/ui/Input'
 import { Modal, ModalAction, ModalTitle } from '@/components/nexkit/ui/Modal'
+import { Textarea } from '@/components/nexkit/ui/Textarea'
 import { ToastContext } from '@/components/nexkit/ui/Toast'
-import { bgStyles, borderStyles, containerStyles, gridStyles } from '@/components/nexkit/ui/styles'
+import { bgStyles, borderStyles, containerStyles, gridStyles, textStyles } from '@/components/nexkit/ui/styles'
 import { FormProgress, NextPageCustom } from '@/helpers/client'
-import { fetchJson } from '@/helpers/http'
+import { DEFAULT_WAIT, fetchJson } from '@/helpers/http'
 import { useLocale } from '@/helpers/locale/'
 import { scUserCreate } from '@/helpers/schema'
 import type { ReqCreateUser, ResCreateUser, ResSelectUsers, User } from '@/pages/api/users'
@@ -44,10 +45,10 @@ const EditModal: FC<{
     fetchJson<ResCreateUser>('/api/users', {
       method: 'POST',
       body: data,
+      wait: DEFAULT_WAIT,
       response: (data) => {
         setToast(`${data.username} を作成しました`)
         setFormProgress('Done')
-        onClose()
       },
     })
   }
@@ -59,6 +60,31 @@ const EditModal: FC<{
 
   if (!isOpen) {
     return <></>
+  }
+
+  if (formProgress === 'Done') {
+    return (
+      <Modal isOpen={isOpen}>
+        <ModalTitle onClose={onClose}>
+          <UserPlusIcon className='mr-2 h-5' />
+          <span>{t('item_user_add')}</span>
+        </ModalTitle>
+
+        <div className={tm(gridStyles.default, 'mb-4 p-2')}>
+          <div className='col-span-12 p-2'>{t('msg_user_add_complete')}</div>
+          <div className='col-span-12 p-2'>
+            <Textarea id='user_add_comp' label={t('item_user_info')} readOnly value={'test'} />
+          </div>
+        </div>
+
+        <ModalAction className='flex-row-reverse'>
+          <Button type='button' onClick={onClose}>
+            <CheckIcon className='mr-1 h-5' />
+            {t('item_ok')}
+          </Button>
+        </ModalAction>
+      </Modal>
+    )
   }
 
   return (
@@ -107,6 +133,7 @@ const EditModal: FC<{
               {t('item_generate')}
             </Button>
           </div>
+          <div className={tm(textStyles.light, 'col-span-12 ml-2 text-sm')}>{t('msg_password_confirm')}</div>
           <div className='col-span-12 p-2 sm:col-span-6'>
             <Checkbox id='isadmin' label={t('item_isadmin')} {...register('isAdmin')} />
           </div>
@@ -114,11 +141,11 @@ const EditModal: FC<{
 
         <ModalAction className='flex-row-reverse'>
           <Button type='submit'>
-            <CheckCircleIcon className='mr-1 h-5' />
+            <CheckIcon className='mr-1 h-5' />
             {t('item_add')}
           </Button>
           <Button type='button' theme='secondary' onClick={onClose}>
-            <XCircleIcon className='mr-1 h-5' />
+            <XMarkIcon className='mr-1 h-5' />
             {t('item_cancel')}
           </Button>
         </ModalAction>

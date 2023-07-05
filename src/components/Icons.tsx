@@ -169,6 +169,22 @@ export const CheckCircleIcon: FC<{ className?: string }> = ({ className }) => {
   )
 }
 
+export const CheckIcon: FC<{ className?: string }> = ({ className }) => {
+  return (
+    <svg
+      className={className}
+      fill='none'
+      stroke='currentColor'
+      strokeWidth={2}
+      viewBox='0 0 24 24'
+      xmlns='http://www.w3.org/2000/svg'
+      aria-hidden='true'
+    >
+      <path strokeLinecap='round' strokeLinejoin='round' d='M4.5 12.75l6 6 9-13.5' />
+    </svg>
+  )
+}
+
 export const XCircleIcon: FC<{ className?: string }> = ({ className }) => {
   return (
     <svg
@@ -185,6 +201,22 @@ export const XCircleIcon: FC<{ className?: string }> = ({ className }) => {
         strokeLinejoin='round'
         d='M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z'
       />
+    </svg>
+  )
+}
+
+export const XMarkIcon: FC<{ className?: string }> = ({ className }) => {
+  return (
+    <svg
+      className={className}
+      fill='none'
+      stroke='currentColor'
+      strokeWidth={2}
+      viewBox='0 0 24 24'
+      xmlns='http://www.w3.org/2000/svg'
+      aria-hidden='true'
+    >
+      <path strokeLinecap='round' strokeLinejoin='round' d='M6 18L18 6M6 6l12 12' />
     </svg>
   )
 }
