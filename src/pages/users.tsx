@@ -26,10 +26,12 @@ const nanoid = customAlphabet('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVW
 const EditModal: FC<{
   isOpen: boolean
   onClose: () => void
-}> = ({ isOpen, onClose }) => {
+  updateUsers: () => void
+}> = ({ isOpen, onClose, updateUsers }) => {
   const { t, fet } = useLocale()
   const { setToast } = useContext(ToastContext)
   const [formProgress, setFormProgress] = useState<FormProgress>('Ready')
+  const [userInfo, setUserInfo] = useState('')
 
   const {
     register,
@@ -47,8 +49,15 @@ const EditModal: FC<{
       body: data,
       wait: DEFAULT_WAIT,
       response: (data) => {
+        setUserInfo(`${t('msg_user_add_notice')}
+----
+${t('item_username')} : ${data.username}
+${t('item_password')} : ${data.password}
+${t('item_email')} : ${data.email}
+${t('item_isadmin')} : ${data.isAdmin ? t('item_true') : t('item_false')}`)
         setToast(`${data.username} を作成しました`)
         setFormProgress('Done')
+        updateUsers()
       },
     })
   }
@@ -73,7 +82,7 @@ const EditModal: FC<{
         <div className={tm(gridStyles.default, 'mb-4 p-2')}>
           <div className='col-span-12 p-2'>{t('msg_user_add_complete')}</div>
           <div className='col-span-12 p-2'>
-            <Textarea id='user_add_comp' label={t('item_user_info')} readOnly value={'test'} />
+            <Textarea id='user_add_comp' label={t('item_user_info')} readOnly value={userInfo} rows={6} />
           </div>
         </div>
 
@@ -171,19 +180,6 @@ const Users: NextPageCustom = () => {
     updateUsers()
   }, [])
 
-  const viewUsers = () => {
-    const userRows = []
-    for (const user of users) {
-      userRows.push(
-        <tr key={`user_${user.id}`} className={tm(bgStyles.light, borderStyles.light, 'border-b')}>
-          <td className='p-2'>{user.name}</td>
-          <td className='p-2'>{user.isAdmin ? 'ok' : 'ng'}</td>
-        </tr>,
-      )
-    }
-    return userRows
-  }
-
   return (
     <main className={tm(containerStyles.default, gridStyles.default)}>
       <Head>
@@ -204,9 +200,18 @@ const Users: NextPageCustom = () => {
             <th className='sticky top-0 bg-gray-200 p-2 dark:bg-gray-700'>is admin</th>
           </tr>
         </thead>
-        <tbody>{viewUsers()}</tbody>
+        <tbody>
+          {users.map((user) => {
+            return (
+              <tr key={`user_${user.id}`} className={tm(bgStyles.light, borderStyles.light, 'border-b')}>
+                <td className='p-2'>{user.name}</td>
+                <td className='p-2'>{user.isAdmin ? 'ok' : 'ng'}</td>
+              </tr>
+            )
+          })}
+        </tbody>
       </table>
-      <EditModal isOpen={isOpenEditModal} onClose={() => setOpenEditModal(false)} />
+      <EditModal isOpen={isOpenEditModal} onClose={() => setOpenEditModal(false)} updateUsers={updateUsers} />
     </main>
   )
 }

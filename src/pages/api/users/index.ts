@@ -1,3 +1,4 @@
+import { hashPassword } from '@/helpers/password'
 import { TypeUserCreate, scUserCreate } from '@/helpers/schema'
 import { handleAuthZod, wrapHandleAuth } from '@/helpers/server'
 import { PrismaClient, User as UserDB } from '@prisma/client'
@@ -24,7 +25,7 @@ const selectUsers = handleAuthZod(z.object({}), async (req, res: NextApiResponse
 })
 
 export type ReqCreateUser = TypeUserCreate
-export type ResCreateUser = TypeUserCreate
+export type ResCreateUser = TypeUserCreate & { id: string }
 
 /**
  * ユーザー作成
@@ -34,7 +35,15 @@ const createUser = handleAuthZod(
     body: scUserCreate,
   }),
   async (req, res: NextApiResponse<ResCreateUser>) => {
-    res.status(200).json(req.body)
+    const user = await prisma.user.create({
+      data: {
+        name: req.body.username,
+        passwordHash: hashPassword(req.body.password),
+        email: req.body.email,
+        isAdmin: req.body.isAdmin,
+      },
+    })
+    res.status(200).json({ id: user.id, ...req.body })
   },
 )
 

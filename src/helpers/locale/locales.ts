@@ -17,6 +17,8 @@ export type LocaleItem =
   | 'item_add'
   | 'item_ok'
   | 'item_cancel'
+  | 'item_true'
+  | 'item_false'
   | 'item_signin'
   | 'item_username'
   | 'item_password'
@@ -26,6 +28,7 @@ export type LocaleItem =
   | 'item_generate'
   | 'msg_password_confirm'
   | 'msg_user_add_complete'
+  | 'msg_user_add_notice'
 
 export const locales: Record<LocaleItem, { en: string; ja?: string }> = {
   menu_dashboard: {
@@ -104,6 +107,14 @@ export const locales: Record<LocaleItem, { en: string; ja?: string }> = {
     en: 'Sign In',
     ja: 'サインイン',
   },
+  item_true: {
+    en: 'True',
+    ja: 'あり',
+  },
+  item_false: {
+    en: 'False',
+    ja: 'なし',
+  },
   item_username: {
     en: 'User Name',
     ja: 'ユーザー名',
@@ -131,5 +142,9 @@ export const locales: Record<LocaleItem, { en: string; ja?: string }> = {
   msg_user_add_complete: {
     en: 'User addition is complete.',
     ja: 'ユーザーの追加が完了しました。',
+  },
+  msg_user_add_notice: {
+    en: 'Notice of user registration',
+    ja: 'ユーザー登録のお知らせ',
   },
 }
