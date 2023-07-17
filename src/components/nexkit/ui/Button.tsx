@@ -31,8 +31,9 @@ export const Button = forwardRef<
     theme?: Theme
   }
 >((props, ref) => {
+  const { theme, ...propsNoCustom } = props
   return (
-    <button {...props} className={getClassName(props.theme, props.className)} ref={ref}>
+    <button {...propsNoCustom} className={getClassName(theme, props.className)} ref={ref}>
       {props.children}
     </button>
   )

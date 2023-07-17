@@ -10,7 +10,8 @@ export const Textarea = forwardRef<
     error?: string | { message?: string }
   }
 >((props, ref) => {
-  const errMsg = typeof props.error == 'object' ? props.error.message : props.error
+  const { label, error, ...propsNoCustom } = props
+  const errMsg = typeof error == 'object' ? error.message : error
   return (
     <div className='relative mt-5'>
       <textarea
@@ -22,7 +23,7 @@ export const Textarea = forwardRef<
           errMsg ? 'border-red-500 focus:border-red-500' : '',
           props.className,
         )}
-        {...props}
+        {...propsNoCustom}
         ref={ref}
       />
       <label
@@ -35,7 +36,7 @@ export const Textarea = forwardRef<
           errMsg ? 'text-red-500 peer-focus:text-red-500 dark:text-red-500' : '',
         )}
       >
-        {props.label}
+        {label}
       </label>
       <div className='mt-0.5 h-3 text-xs text-red-500'>{errMsg || ''}</div>
     </div>

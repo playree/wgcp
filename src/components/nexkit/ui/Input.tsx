@@ -60,14 +60,15 @@ export const Input = forwardRef<
     error?: string | { message?: string }
   }
 >((props, ref) => {
-  const errMsg = typeof props.error == 'object' ? props.error.message : props.error
-  const enablePassSB = props.type === 'password' && props.enablePasswordShowButton
+  const { label, enablePasswordShowButton, error, ...propsNoCustom } = props
+  const errMsg = typeof error == 'object' ? error.message : error
+  const enablePassSB = props.type === 'password' && enablePasswordShowButton
   const [isPassShow, setPassShow] = useState(false)
 
   return (
     <div className='relative mt-2'>
       <input
-        {...props}
+        {...propsNoCustom}
         ref={ref}
         placeholder=' '
         type={isPassShow ? 'text' : props.type}
@@ -101,7 +102,7 @@ export const Input = forwardRef<
           errMsg ? 'text-red-500 peer-focus:text-red-500 dark:text-red-500' : '',
         )}
       >
-        {props.label}
+        {label}
       </label>
       <div className='mt-0.5 h-3 text-xs text-red-500'>{errMsg || ''}</div>
     </div>
