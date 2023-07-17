@@ -74,12 +74,19 @@ const SignIn: NextPageCustom = () => {
         )}
         <form className={gridStyles.default} onSubmit={handleSubmit(onSubmit)}>
           <div className='col-span-12 p-2'>
-            <Input id='username' label={t('item_username')} error={fet(errors.username)} {...register('username')} />
+            <Input
+              id='username'
+              autoComplete='username'
+              label={t('item_username')}
+              error={fet(errors.username)}
+              {...register('username')}
+            />
           </div>
           <div className='col-span-12 p-2'>
             <Input
               id='password'
               type='password'
+              autoComplete='current-password'
               label={t('item_password')}
               error={fet(errors.password)}
               {...register('password')}

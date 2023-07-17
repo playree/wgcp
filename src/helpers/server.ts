@@ -30,7 +30,9 @@ export const handleZod = <T extends ZodSchema = ZodSchema>(
   return async (req: NextApiRequest, res: NextApiResponse) => {
     const parsed = schema.safeParse(req)
     if (!parsed.success) {
-      return resError(res, 400, 'Bad Request', JSON.parse(parsed.error.message))
+      const errorMessage = JSON.parse(parsed.error.message)
+      console.warn(errorMessage)
+      return resError(res, 400, 'Bad Request', errorMessage)
     }
     return next(req, res)
   }
@@ -72,7 +74,9 @@ export const handleAuthZod = <T extends ZodSchema = ZodSchema>(
     }
     const parsed = schema.safeParse(req)
     if (!parsed.success) {
-      return resError(res, 400, 'Bad Request', JSON.parse(parsed.error.message))
+      const errorMessage = JSON.parse(parsed.error.message)
+      console.warn(errorMessage)
+      return resError(res, 400, 'Bad Request', errorMessage)
     }
     return next(req, res, session)
   }

@@ -17,7 +17,7 @@ export const Textarea = forwardRef<
       <textarea
         className={tm(
           borderStyles.light,
-          'peer block w-full appearance-none p-1 text-sm',
+          'peer block w-full appearance-none p-2 text-sm',
           'rounded border text-gray-900 read-only:border-dashed dark:text-white',
           'focus:border-blue-400 focus:outline-none focus:ring-0 dark:focus:border-blue-400',
           errMsg ? 'border-red-500 focus:border-red-500' : '',

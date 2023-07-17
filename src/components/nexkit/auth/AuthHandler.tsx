@@ -4,7 +4,7 @@ import React, { FC, useEffect } from 'react'
 
 export const PATH_SIGNIN = '/auth/signin'
 
-export const AuthHandler: FC<{ children: JSX.Element }> = ({ children }) => {
+export const AuthHandler: FC<{ children: JSX.Element; requireAdmin?: boolean }> = ({ children, requireAdmin }) => {
   const { status, data: session } = useSession()
   const router = useRouter()
   useEffect(() => {
@@ -18,6 +18,10 @@ export const AuthHandler: FC<{ children: JSX.Element }> = ({ children }) => {
     }
   }, [session])
   if (status === 'authenticated') {
+    if (requireAdmin && !session.user.isAdmin) {
+      router.replace('/')
+      return <></>
+    }
     return children
   }
   return (

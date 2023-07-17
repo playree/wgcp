@@ -82,7 +82,7 @@ export const Input = forwardRef<
           props.className,
         )}
       />
-      {enablePassSB ? (
+      {enablePassSB && (
         <PasswordEyeIcon
           className='absolute right-1 top-4 h-4 hover:cursor-pointer'
           isShow={isPassShow}
@@ -90,7 +90,7 @@ export const Input = forwardRef<
             setPassShow(!isPassShow)
           }}
         />
-      ) : undefined}
+      )}
       <label
         htmlFor={props.id}
         className={tm(

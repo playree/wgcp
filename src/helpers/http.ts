@@ -1,5 +1,5 @@
 /** HTTPメソッド定義 */
-export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE'
+export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'
 
 export const DEFAULT_WAIT = 200
 

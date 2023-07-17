@@ -24,7 +24,7 @@ export const App = ({ Component, pageProps }: AppPropsCustom) => {
   }
   if (Component.enableAuth) {
     // 認証を必要とするページ
-    element = <AuthHandler>{element}</AuthHandler>
+    element = <AuthHandler requireAdmin={Component.requireAdmin}>{element}</AuthHandler>
   }
   return (
     <SessionProvider session={pageProps.session}>

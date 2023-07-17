@@ -121,31 +121,33 @@ export const Menu: MenuContentType = ({ select, closeMenu }) => {
         </li>
       </ul>
 
-      <ul // 管理者メニュー
-        className='mt-4 space-y-2 font-medium'
-      >
-        <li>
-          <MenuGroup text={t('group_admin')} />
-        </li>
-        <li>
-          <MenuButton
-            text={t('menu_users')}
-            to='/users'
-            icon={<UsersIcon className='h-6' />}
-            onClick={closeMenu}
-            selected={'users' === select}
-          />
-        </li>
-        <li>
-          <MenuButton
-            text={t('menu_settings')}
-            to='/settings'
-            icon={<Cog6ToothIcon className='h-6' />}
-            onClick={closeMenu}
-            selected={'settings' === select}
-          />
-        </li>
-      </ul>
+      {session?.user.isAdmin && (
+        <ul // 管理者メニュー
+          className='mt-4 space-y-2 font-medium'
+        >
+          <li>
+            <MenuGroup text={t('group_admin')} />
+          </li>
+          <li>
+            <MenuButton
+              text={t('menu_users')}
+              to='/users'
+              icon={<UsersIcon className='h-6' />}
+              onClick={closeMenu}
+              selected={'users' === select}
+            />
+          </li>
+          <li>
+            <MenuButton
+              text={t('menu_settings')}
+              to='/settings'
+              icon={<Cog6ToothIcon className='h-6' />}
+              onClick={closeMenu}
+              selected={'settings' === select}
+            />
+          </li>
+        </ul>
+      )}
     </>
   )
 }

@@ -47,5 +47,6 @@ const createUser = handleAuthZod(
   },
 )
 
+// 要管理者権限
 const handler = wrapHandleAuth({ GET: selectUsers, POST: createUser }, true)
 export default handler

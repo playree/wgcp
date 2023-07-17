@@ -9,6 +9,7 @@ export type NextPageCustom<P = Record<string, unknown>> = NextPage<
   Record<string, Session | unknown> & P
 > & {
   enableAuth?: boolean
+  requireAdmin?: boolean
   enableSideMenu?: boolean | string
 }
 

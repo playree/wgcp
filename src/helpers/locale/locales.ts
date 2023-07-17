@@ -9,12 +9,14 @@ export type LocaleItem =
   | 'group_admin'
   | 'item_user'
   | 'item_user_add'
+  | 'item_user_edit'
   | 'item_user_info'
   | 'item_admin'
   | 'item_systeminfo'
   | 'item_freemem'
   | 'item_uptime'
   | 'item_add'
+  | 'item_update'
   | 'item_ok'
   | 'item_cancel'
   | 'item_true'
@@ -29,6 +31,9 @@ export type LocaleItem =
   | 'msg_password_confirm'
   | 'msg_user_add_complete'
   | 'msg_user_add_notice'
+  | 'msg_user_update_complete'
+  | 'msg_user_update_notice'
+  | 'msg_common_error'
 
 export const locales: Record<LocaleItem, { en: string; ja?: string }> = {
   menu_dashboard: {
@@ -71,6 +76,10 @@ export const locales: Record<LocaleItem, { en: string; ja?: string }> = {
     en: 'Add User',
     ja: 'ユーザー追加',
   },
+  item_user_edit: {
+    en: 'Edit User',
+    ja: 'ユーザー編集',
+  },
   item_user_info: {
     en: 'User information',
     ja: 'ユーザー情報',
@@ -94,6 +103,10 @@ export const locales: Record<LocaleItem, { en: string; ja?: string }> = {
   item_add: {
     en: 'Add',
     ja: '追加',
+  },
+  item_update: {
+    en: 'Update',
+    ja: '更新',
   },
   item_ok: {
     en: 'OK',
@@ -146,5 +159,17 @@ export const locales: Record<LocaleItem, { en: string; ja?: string }> = {
   msg_user_add_notice: {
     en: 'Notice of user registration',
     ja: 'ユーザー登録のお知らせ',
+  },
+  msg_user_update_complete: {
+    en: 'User update is complete.',
+    ja: 'ユーザーの更新が完了しました。',
+  },
+  msg_user_update_notice: {
+    en: 'Notice of user update',
+    ja: 'ユーザー更新のお知らせ',
+  },
+  msg_common_error: {
+    en: 'An error has occurred',
+    ja: 'エラーが発生しました',
   },
 }
