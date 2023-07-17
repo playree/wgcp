@@ -1,6 +1,6 @@
 export const textStyles = {
   default: 'text-gray-900 dark:text-white',
-  light: 'text-gray-700 dark:text-gray-400',
+  light: 'text-gray-600 dark:text-gray-400',
 }
 
 export const bgStyles = {
